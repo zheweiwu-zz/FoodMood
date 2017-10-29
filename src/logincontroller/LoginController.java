@@ -9,6 +9,7 @@ import databasecontroller.Database;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import loginview.*;
+import profileview.*;
 /**
  *
  * @author Zhewei
@@ -26,10 +27,16 @@ public class LoginController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==lv.createProfileBtn) {
-            
+             CreateProfileView cpv = new CreateProfileView();
+             lv.getF().dispose();
         }
         else if (ae.getSource()==lv.loginBtn) {
-            Database.authProfile(lv.getUsername(), lv.getPassword());
+            if (Database.authProfile(lv.getUsername(), lv.getPassword())) {
+                
+            }
+            else {
+                System.out.println("Error authenticating");
+            }
         }
     }
 }
