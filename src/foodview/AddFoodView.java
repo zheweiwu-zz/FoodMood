@@ -54,7 +54,6 @@ public class AddFoodView {
   
         calendar = new GregorianCalendar();
         createComponents();
-        addActionListeners();
         
         f.add(p, BorderLayout.CENTER);
         f.setVisible(true);
@@ -137,19 +136,6 @@ public class AddFoodView {
         p.add(addBtn, c);
     }
     
-    private void addActionListeners() {
-        
-        addBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Database d = new Database();
-                try { 
-                    d.POSTFood();
-                } catch (Exception ex){};
-            }
-        });
-    }
-    
     /**
      * gets food name input
      * @return food name as a String
@@ -169,4 +155,10 @@ public class AddFoodView {
     public JFrame getF() {
         return f;
     }
+
+    public JButton getAddBtn() {
+        return addBtn;
+    }
+    
+    
 }

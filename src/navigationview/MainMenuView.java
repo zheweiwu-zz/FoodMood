@@ -88,4 +88,8 @@ public class MainMenuView {
     public JButton getEditEntriesBtn() {
         return editEntriesBtn;
     }
+    
+    public JFrame getF() {
+        return f;
+    }
 }

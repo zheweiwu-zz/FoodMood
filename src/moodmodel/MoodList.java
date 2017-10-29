@@ -11,11 +11,15 @@ import java.util.ArrayList;
  *
  * @author Zhewei
  */
-public class ModelList {
+public class MoodList {
     private ArrayList<MoodModel> moods;
     
-    public ModelList(ArrayList<MoodModel> moods) {
+    public MoodList(ArrayList<MoodModel> moods) {
         this.moods = moods;
+    }
+
+    public MoodList() {
+        moods = new ArrayList<>();
     }
     
     public void addMood(MoodModel mood) {

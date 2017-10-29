@@ -6,9 +6,11 @@
 package logincontroller;
 
 import databasecontroller.Database;
+import foodmodel.FoodList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import loginview.*;
+import moodmodel.MoodList;
 import navigationcontroller.NavigationController;
 import navigationview.MainMenuView;
 import profilecontroller.ProfileController;
@@ -37,7 +39,7 @@ public class LoginController implements ActionListener {
         else if (ae.getSource()==lv.loginBtn) {
             if (Database.authProfile(lv.getUsername(), lv.getPassword())) {
                 MainMenuView mmv = new MainMenuView();
-                NavigationController nc = new NavigationController(mmv);
+                NavigationController nc = new NavigationController(mmv, new FoodList(), new MoodList());
                 lv.getF().dispose();
             }
             else {

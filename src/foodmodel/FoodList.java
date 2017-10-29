@@ -18,6 +18,10 @@ public class FoodList {
         this.foods = foods;
     }
     
+    public FoodList () {
+        this.foods = new ArrayList<>();
+    }
+    
     public void addFood(FoodModel food) {
         foods.add(food);
     }
