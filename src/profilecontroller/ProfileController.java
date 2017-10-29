@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import logincontroller.LoginController;
+import loginview.LoginView;
 import profileview.*;
 
 /**
@@ -30,6 +32,9 @@ public class ProfileController implements ActionListener {
         if (ae.getSource()==cpv.createBtn) {
             try { 
                 Database.POSTProfile();
+                cpv.getF().dispose();
+                LoginView lv = new LoginView();
+                LoginController lc = new LoginController(lv);
             } catch (Exception ex) {
                 Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }

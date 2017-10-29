@@ -134,4 +134,8 @@ public class CreateProfileView {
     public String getWeight() {
         return weightField.getText();
     }
+    
+    public JFrame getF() {
+        return f;
+    }
 }

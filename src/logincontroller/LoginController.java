@@ -9,6 +9,8 @@ import databasecontroller.Database;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import loginview.*;
+import navigationcontroller.NavigationController;
+import navigationview.MainMenuView;
 import profilecontroller.ProfileController;
 import profileview.*;
 /**
@@ -34,7 +36,9 @@ public class LoginController implements ActionListener {
         }
         else if (ae.getSource()==lv.loginBtn) {
             if (Database.authProfile(lv.getUsername(), lv.getPassword())) {
-                
+                MainMenuView mmv = new MainMenuView();
+                NavigationController nc = new NavigationController(mmv);
+                lv.getF().dispose();
             }
             else {
                 System.out.println("Error authenticating");
