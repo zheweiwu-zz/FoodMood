@@ -18,7 +18,7 @@ import java.net.URL;
  */
 public class Database {
     
-    public String url = "https://foodmood-a4f9d.firebaseio.com/";
+    public static String url = "https://foodmood-a4f9d.firebaseio.com/";
     private String username;
     private String password;
     
@@ -56,7 +56,7 @@ public class Database {
     
     
 //This method should take a ProfileModel object.
-    public void POSTProfile() throws Exception {
+    public static void POSTProfile() throws Exception {
         try {
             URL urlConnection = new URL(url);
 

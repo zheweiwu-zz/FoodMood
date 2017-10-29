@@ -9,6 +9,7 @@ import databasecontroller.Database;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import loginview.*;
+import profilecontroller.ProfileController;
 import profileview.*;
 /**
  *
@@ -28,6 +29,7 @@ public class LoginController implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==lv.createProfileBtn) {
              CreateProfileView cpv = new CreateProfileView();
+             ProfileController pc = new ProfileController(cpv);
              lv.getF().dispose();
         }
         else if (ae.getSource()==lv.loginBtn) {
