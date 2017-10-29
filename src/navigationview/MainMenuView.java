@@ -73,4 +73,19 @@ public class MainMenuView {
         
     }
 
+    public JButton getAddFoodBtn() {
+        return addFoodBtn;
+    }
+
+    public JButton getAddMoodBtn() {
+        return addMoodBtn;
+    }
+
+    public JButton getViewProfileBtn() {
+        return viewProfileBtn;
+    }
+
+    public JButton getEditEntriesBtn() {
+        return editEntriesBtn;
+    }
 }
