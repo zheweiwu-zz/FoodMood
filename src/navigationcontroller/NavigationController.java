@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import moodcontroller.MoodController;
 import moodmodel.MoodList;
+import moodview.AddMoodView;
 import navigationview.MainMenuView;
 
 /**
@@ -39,7 +40,9 @@ public class NavigationController implements ActionListener {
             mmv.getF().setVisible(false);
         }
         else if (ae.getSource()==mmv.getAddMoodBtn()) {
-            
+            AddMoodView amv = new AddMoodView();
+            mc.setAmv(amv);
+            mmv.getF().setVisible(false);
         }
         else if (ae.getSource()==mmv.getViewProfileBtn()) {
             
@@ -51,9 +54,10 @@ public class NavigationController implements ActionListener {
 
     private void addtheListeners() {
         mmv.getAddFoodBtn().addActionListener(this);
+        mmv.getAddMoodBtn().addActionListener(this);
         mmv.getViewProfileBtn().addActionListener(this);
-        mmv.getViewProfileBtn().addActionListener(this);
-        mmv.getEditEntriesBtn().addActionListener(this);    }
+        mmv.getEditEntriesBtn().addActionListener(this);
+    }
 
     public FoodController getFc() {
         return fc;
