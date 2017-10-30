@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import foodmodel.FoodModel;
+import java.io.IOException;
 import moodmodel.MoodModel;
 import java.util.Date;
 /**
@@ -31,7 +32,8 @@ public class Database {
     public static boolean authProfile(String username, String password)
     {
      String url = "https://foodmood-a4f9d.firebaseio.com/profiles/" + username + ".json";
-        String inputLine = "";
+        String inputLine;
+       
         //System.out.println(url);
         try {
             URL urlConnect = new URL(url);
@@ -43,15 +45,15 @@ public class Database {
                     new InputStreamReader(con.getInputStream()));
 
             inputLine = in.readLine();
+            
+            System.out.print(inputLine);
 
-            if (inputLine.contains(username) && inputLine.contains(password))
-                    {
-                        System.out.println("Holy shit it works!");
-                    return true;
-                    }
-            else return false;
-        } catch (Exception e) {
-            e.printStackTrace();
+         if (inputLine.contains(username) && inputLine.contains(password))
+         {
+         return true;
+         }
+//System.out.println("Holy shit it works!");
+        } catch (IOException e) {
         }
         return false;
     }
