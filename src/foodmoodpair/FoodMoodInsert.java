@@ -23,13 +23,10 @@ public class FoodMoodInsert {
         hasFood = new hasFood(this);
         hasMood = new hasMood(this);
         fmState = hasMood;
-        System.out.println("setting" + fmState.toString());
-
     }
     
     void setFmState(FoodMoodState newFmState) {
         fmState = newFmState;
-        System.out.println("setting" + newFmState.toString());
     }
     
     public FoodModel insertFood (FoodModel a) {
