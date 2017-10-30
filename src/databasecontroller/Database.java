@@ -13,7 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import foodmodel.FoodModel;
 import moodmodel.MoodModel;
-
+import java.util.Date;
 /**
  *
  * @author Alex
@@ -215,7 +215,7 @@ public class Database {
         //return new ProfileModel();
     }
     // this method will take a profilemodel, user data parameter (e.g. weight) and the value of the parameter (e.g. 180)
-    public void updateFoodData(String foodID)
+    public static void updateFoodData(String foodID, String newFoodName, Date consumedAt)
     {
     try {
         String url = "https://foodmood-a4f9d.firebaseio.com/foods/" + foodID + ".json";
@@ -228,7 +228,7 @@ public class Database {
 
             
           // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = new String();
+            String jsonFormattedUserData = " { \"name\": \"" + newFoodName + "\" , \"date\": \"" + consumedAt + "\" } ";
             
             
         } 
@@ -318,7 +318,7 @@ public class Database {
         //return new ProfileModel();
     }
     // this method will take a profilemodel, user data parameter (e.g. weight) and the value of the parameter (e.g. 180)
-    public void updateMoodData(String moodID)
+    public void updateMoodData(String moodID, String newMoodName)
     {
     try {
         String url = "https://foodmood-a4f9d.firebaseio.com/foods/" + moodID + ".json";

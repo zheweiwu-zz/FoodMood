@@ -83,9 +83,11 @@ public class FoodController implements ActionListener{
         for (int i = 0; i<efv.getModel().getRowCount(); i++) {
             if (efv.getModel().getValueAt(i, 2).equals("delete")) {
                 foods.removeFood(i);
+                
             }
             else if (!efv.getModel().getValueAt(i, 2).equals("")) {
                 foods.changeFood(i, new FoodModel((String) efv.getModel().getValueAt(i, 2), foods.getFood(i).getConsumedAt()));
+                //Database.updateFoodData(, efv.getModel().getValueAt(i,1), foods.getFood(i).getConsumedAt());
             }
         }
     }
