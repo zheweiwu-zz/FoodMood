@@ -27,6 +27,7 @@ class hasFood implements FoodMoodState {
 
     @Override
     public MoodModel insertMood(MoodModel a) {
+        System.out.println("inserting mood in food");
         this.a.setFmState(this.a.getHasMood());
         return a;
     }

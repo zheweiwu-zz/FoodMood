@@ -7,6 +7,7 @@ package navigationcontroller;
 
 import foodcontroller.FoodController;
 import foodmodel.FoodList;
+import foodmoodpair.FoodMoodInsert;
 import foodview.AddFoodView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,14 +22,16 @@ import navigationview.MainMenuView;
  */
 public class NavigationController implements ActionListener {
 
-    MainMenuView mmv;
+    private MainMenuView mmv;
     private FoodController fc;
-    MoodController mc;
+    private MoodController mc;
+    private FoodMoodInsert fmi;
     
     public NavigationController(MainMenuView mmv, FoodList foods, MoodList moods) {
         this.mmv = mmv;
-        fc = new FoodController(foods, this);
-        mc = new MoodController(moods, this);
+        fmi = new FoodMoodInsert();
+        fc = new FoodController(foods, this, fmi);
+        mc = new MoodController(moods, this, fmi);
         addtheListeners();
     }
 

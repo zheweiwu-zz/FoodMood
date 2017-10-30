@@ -16,15 +16,17 @@ import navigationcontroller.NavigationController;
  *
  * @author Zhewei
  */
-public class FoodController extends FoodMoodInsert implements ActionListener{
+public class FoodController implements ActionListener{
     
     private FoodList foods;
     private AddFoodView afv;
     private NavigationController nc;
+    private FoodMoodInsert fmi;
     
-    public FoodController(FoodList foods, NavigationController nc) {
+    public FoodController(FoodList foods, NavigationController nc, FoodMoodInsert fmi) {
         this.foods = foods;
         this.nc = nc;
+        this.fmi = fmi;
     }
 
     public AddFoodView getAfv() {
@@ -41,7 +43,7 @@ public class FoodController extends FoodMoodInsert implements ActionListener{
         if (ae.getSource()==afv.getAddBtn()) {
             //add the food
             FoodModel newFood = new FoodModel (afv.getFoodName());
-            if (insertFood(newFood)!=null) {
+            if (fmi.insertFood(newFood)!=null) {
                 foods.addFood(newFood);
                 afv.getF().dispose();
                 nc.getMmv().getF().setVisible(true);

@@ -18,16 +18,17 @@ import navigationcontroller.NavigationController;
  *
  * @author Zhewei
  */
-public class MoodController extends FoodMoodInsert implements ActionListener{
+public class MoodController implements ActionListener{
     
     private MoodList moods;
     private AddMoodView amv;
     private NavigationController nc;
+    private FoodMoodInsert fmi;
     
-    
-    public MoodController(MoodList moods, NavigationController nc) {
+    public MoodController(MoodList moods, NavigationController nc, FoodMoodInsert fmi) {
         this.moods = moods;
         this.nc = nc;
+        this.fmi = fmi;
     }
 
     public void setAmv(AddMoodView amv) {
@@ -39,7 +40,7 @@ public class MoodController extends FoodMoodInsert implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==amv.getAddBtn()) {
             MoodModel newMood = new MoodModel (amv.getMoodDescription());
-            if (insertMood(newMood)!=null) {
+            if (fmi.insertMood(newMood)!=null) {
                 moods.addMood(newMood);
                 amv.getF().dispose();
                 nc.getMmv().getF().setVisible(true);
