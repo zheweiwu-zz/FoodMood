@@ -35,7 +35,7 @@ public class AddFoodView {
     
     private Calendar calendar;
     
-    private JButton addBtn;
+    private JButton addBtn, returnButton;
     
     /**
      * default constructor for AddFoodUI
@@ -134,6 +134,11 @@ public class AddFoodView {
         c.gridx = 1;
         c.gridy = 3;
         p.add(addBtn, c);
+        
+        returnButton = new JButton("Return");
+        c.gridx = 3;
+        c.gridy = 3;
+        p.add(returnButton, c);
     }
     
     /**
@@ -158,6 +163,10 @@ public class AddFoodView {
 
     public JButton getAddBtn() {
         return addBtn;
+    }
+    
+    public JButton getReturn() {
+        return returnButton;
     }
     
     

@@ -5,13 +5,10 @@
  */
 package moodview;
 
-import databasecontroller.Database;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JButton;
@@ -38,6 +35,7 @@ public class AddMoodView {
     private final String[] TIMEPERIOD = {"AM", "PM"};
     private JComboBox months, timePeriod;
     private JButton addBtn;
+    private JButton returnButton;
     
     /**
      * default constructor for AddMoodUI
@@ -137,6 +135,11 @@ public class AddMoodView {
         c.gridx = 1;
         c.gridy = 3;
         p.add(addBtn, c);
+        
+        returnButton = new JButton("Return");
+        c.gridx = 3;
+        c.gridy = 3;
+        p.add(returnButton, c);
     }
     
     /**
@@ -161,5 +164,9 @@ public class AddMoodView {
     
     public JFrame getF() {
         return f;
+    }
+    
+    public JButton getReturn() {
+        return returnButton;
     }
 }

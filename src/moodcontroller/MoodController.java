@@ -34,6 +34,7 @@ public class MoodController implements ActionListener{
     public void setAmv(AddMoodView amv) {
         this.amv = amv;
         this.amv.getAddBtn().addActionListener(this);
+        this.amv.getReturn().addActionListener(this);
     }
 
     @Override
@@ -48,6 +49,10 @@ public class MoodController implements ActionListener{
             else {
                 System.out.println("Already inserted mood");
             }
+        }
+        else if (ae.getSource()==amv.getReturn()) {
+            amv.getF().dispose();
+            nc.getMmv().getF().setVisible(true);
         }
     }
 }

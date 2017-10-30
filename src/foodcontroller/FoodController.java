@@ -36,6 +36,7 @@ public class FoodController implements ActionListener{
     public void setAfv(AddFoodView afv) {
         this.afv = afv;
         this.afv.getAddBtn().addActionListener(this);
+        this.afv.getReturn().addActionListener(this);
     }
 
     @Override
@@ -51,6 +52,10 @@ public class FoodController implements ActionListener{
             else {
                 System.out.println("Already inserted food");
             }
+        }
+        else if (ae.getSource()==afv.getReturn()) {
+            afv.getF().dispose();
+            nc.getMmv().getF().setVisible(true);
         }
     }
 }
