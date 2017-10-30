@@ -40,6 +40,7 @@ public class MoodController extends FoodMoodInsert implements ActionListener{
         if (ae.getSource()==amv.getAddBtn()) {
             MoodModel newMood = new MoodModel (amv.getMoodDescription());
             if (insertMood(newMood)!=null) {
+                moods.addMood(newMood);
                 amv.getF().dispose();
                 nc.getMmv().getF().setVisible(true);
             }
