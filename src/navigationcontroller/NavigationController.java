@@ -95,7 +95,10 @@ public class NavigationController implements ActionListener {
 
     private void saveFoodChanges() {
         for (int i = 0; i<efv.getModel().getRowCount(); i++) {
-            if (!efv.getModel().getValueAt(i, 2).equals("")) {
+            if (efv.getModel().getValueAt(i, 2).equals("delete")) {
+                fc.getFoods().removeFood(i);
+            }
+            else if (!efv.getModel().getValueAt(i, 2).equals("")) {
                 fc.getFoods().changeFood(i, new FoodModel((String) efv.getModel().getValueAt(i, 2), fc.getFoods().getFood(i).getConsumedAt()));
             }
         }
