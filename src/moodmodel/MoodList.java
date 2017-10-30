@@ -46,4 +46,8 @@ public class MoodList {
     public moodmodel.MoodModel getMood(int index) {
         return moods.get(index);
     }
+    
+    public ArrayList<MoodModel> getAllMoods() {
+        return moods;
+    }
 }

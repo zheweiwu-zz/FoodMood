@@ -5,13 +5,13 @@
  */
 package moodcontroller;
 
-import foodmodel.FoodModel;
 import foodmoodpair.FoodMoodInsert;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import moodmodel.MoodList;
 import moodmodel.MoodModel;
 import moodview.AddMoodView;
+import moodview.EditMoodView;
 import navigationcontroller.NavigationController;
 
 /**
@@ -24,6 +24,7 @@ public class MoodController implements ActionListener{
     private AddMoodView amv;
     private NavigationController nc;
     private FoodMoodInsert fmi;
+    private EditMoodView emv;
     
     public MoodController(MoodList moods, NavigationController nc, FoodMoodInsert fmi) {
         this.moods = moods;
@@ -54,5 +55,36 @@ public class MoodController implements ActionListener{
             amv.getF().dispose();
             nc.getMmv().getF().setVisible(true);
         }
+        else if (ae.getSource()==emv.getSave()) {
+            saveMoodChanges();
+        }
+    }
+    
+    public MoodList getMoods() {
+        return moods;
+    }
+    
+    private void updateEditMood() {
+        
+        for (MoodModel mood: moods.getAllMoods()) {
+            emv.getModel().addRow(new Object[]{mood.getDescription(), mood.getRecordedAt(), ""});
+        }
+    }
+
+    private void saveMoodChanges() {
+        for (int i = 0; i<emv.getModel().getRowCount(); i++) {
+            if (emv.getModel().getValueAt(i, 2).equals("delete")) {
+                moods.removeMood(i);
+            }
+            else if (!emv.getModel().getValueAt(i, 2).equals("")) {
+                moods.changeMood(i, new MoodModel((String) emv.getModel().getValueAt(i, 2), moods.getMood(i).getRecordedAt()));
+            }
+        }
+    }
+    
+    public void setEfv(EditMoodView efv) {
+        this.emv = efv;
+        this.updateEditMood();
+        this.emv.getSave().addActionListener(this);
     }
 }

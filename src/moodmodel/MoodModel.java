@@ -21,6 +21,11 @@ public class MoodModel {
         this.recordedAt = new Date();
     }
     
+    public MoodModel(String description, Date recordedAt) {
+        this.description = description;
+        this.recordedAt = recordedAt;
+    }
+    
     /**
      * Get the description of the mood
      * @return the description of the mood
