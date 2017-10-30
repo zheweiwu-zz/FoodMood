@@ -31,7 +31,7 @@ public class ProfileController implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==cpv.createBtn) {
             try { 
-                Database.POSTProfile();
+                Database.POSTProfile(cpv.getUsername(), cpv.getPassowrd(), cpv.getAge(), cpv.getWeight());
                 cpv.getF().dispose();
                 LoginView lv = new LoginView();
                 LoginController lc = new LoginController(lv);

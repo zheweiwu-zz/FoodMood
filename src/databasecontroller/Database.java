@@ -19,6 +19,7 @@ import java.net.URL;
 public class Database {
     
     public static String url = "https://foodmood-a4f9d.firebaseio.com/";
+    public static String url2 = "https://foodmood-a4f9d.firebaseio.com/profiles.json";
     private String username;
     private String password;
     
@@ -56,9 +57,9 @@ public class Database {
     
     
 //This method should take a ProfileModel object.
-    public static void POSTProfile() throws Exception {
+    public static void POSTProfile(String username, String password, String age, String weight) throws Exception {
         try {
-            URL urlConnection = new URL(url);
+            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/profiles.json");
 
             HttpURLConnection con = (HttpURLConnection) urlConnection.openConnection();
             con.setDoOutput(true);
@@ -68,14 +69,13 @@ public class Database {
             con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
             con.setRequestMethod("POST");
 // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = new String();
+            String jsonFormattedUserData = "{ \"" + username + "\": { \"username\": \"" + username + "\" , \"password\" :\"" + password + "\" , \"age\" :\"" + age + "\" , \"weight\" :\"" + weight + "\" } }";
 
-            //System.out.println("");
-
-            OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream());
-            osw.write(jsonFormattedUserData);
-            osw.flush();
-            osw.close();
+            try ( //System.out.println("");
+                    OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream())) {
+                osw.write(jsonFormattedUserData);
+                osw.flush();
+            }
 
             if (con.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
                 System.out.print("HTTP code : "
