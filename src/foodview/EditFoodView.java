@@ -8,6 +8,7 @@ package foodview;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -24,6 +25,7 @@ public class EditFoodView {
     private Object[] columnNames = {"Food", "Date entered", "New food"};
     private JTable foodEntries;
     private DefaultTableModel model;
+    private JButton saveChanges;
     
     public EditFoodView() {
         frame = new JFrame();
@@ -35,6 +37,8 @@ public class EditFoodView {
         model = new DefaultTableModel(columnNames, 0);
         foodEntries = new JTable(model);
         panel.add(foodEntries, BorderLayout.CENTER);
+        saveChanges = new JButton("Save changes");
+        panel.add(saveChanges, BorderLayout.SOUTH);
         frame.setVisible(true);
     }
     
@@ -44,5 +48,9 @@ public class EditFoodView {
 
     public DefaultTableModel getModel() {
         return model;
+    }
+    
+    public JButton getSave() {
+        return saveChanges;
     }
 }

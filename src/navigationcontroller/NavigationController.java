@@ -56,6 +56,10 @@ public class NavigationController implements ActionListener {
         else if (ae.getSource()==mmv.getEditEntriesBtn()) {
             efv = new EditFoodView();
             this.updateEditFood();
+            efv.getSave().addActionListener(this);
+        }
+        else if (ae.getSource()==efv.getSave()) {
+            saveFoodChanges();
         }
     }
 
@@ -80,11 +84,14 @@ public class NavigationController implements ActionListener {
     
     private void updateEditFood() {
         
-        efv.getModel().addRow(new Object[]{"Food", "Consumed at", "New Name"});
-
+        //efv.getModel().addRow(new Object[]{"Food", "Consumed at", "New Name"});
         
         for (FoodModel food: fc.getFoods().getAllFoods()) {
             efv.getModel().addRow(new Object[]{food.getName(), food.getConsumedAt(), ""});
         }
+    }
+
+    private void saveFoodChanges() {
+        
     }
 }
