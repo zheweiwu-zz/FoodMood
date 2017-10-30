@@ -24,6 +24,11 @@ public class FoodModel {
         this.name = name;
         this.consumedAt = new Date();
     }
+    
+    public FoodModel(String name, Date date) {
+        this.name = name;
+        this.consumedAt = date;
+    }
     /**
      * Get the name of the food
      * @return name of the food
