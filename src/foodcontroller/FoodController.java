@@ -12,6 +12,7 @@ import foodview.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import navigationcontroller.NavigationController;
+import databasecontroller.Database;
 /**
  *
  * @author Zhewei
@@ -46,6 +47,10 @@ public class FoodController implements ActionListener{
             FoodModel newFood = new FoodModel (afv.getFoodName());
             if (fmi.insertFood(newFood)!=null) {
                 foods.addFood(newFood);
+                try{
+                    Database.POSTFood(newFood);
+                }
+                catch (Exception e){}
                 afv.getF().dispose();
                 nc.getMmv().getF().setVisible(true);
             }

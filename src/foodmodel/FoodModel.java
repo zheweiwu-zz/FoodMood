@@ -6,6 +6,7 @@
 package foodmodel;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  *
@@ -15,6 +16,8 @@ public class FoodModel {
     
     private String name;
     private Date consumedAt;
+    private int foodID;
+    private Random random;
     
     public FoodModel() {
         System.out.println("FoodModel instantiated");
@@ -23,6 +26,7 @@ public class FoodModel {
     public FoodModel(String name) {
         this.name = name;
         this.consumedAt = new Date();
+        this.foodID = random.nextInt(10000);
     }
     
     public FoodModel(String name, Date date) {
@@ -62,6 +66,13 @@ public class FoodModel {
      * @return Get the name of food and when it was consumed
      */
     public String getInfo() {
-        return name+" "+consumedAt;
+        return name+" "+consumedAt+" "+foodID;
+    }
+    /**
+     * Get the ID of the food
+     * @return ID of the food
+     */
+    public int getID() {
+        return foodID;
     }
 }

@@ -11,6 +11,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import foodmodel.FoodModel;
 
 /**
  *
@@ -158,9 +159,9 @@ public class Database {
         }
     }
     // **************************************************************FOODS SECTION***************************************************************************
-    public void POSTFood() throws Exception {
+    public static void POSTFood(FoodModel newFood) throws Exception {
         try {
-            URL urlConnection = new URL(url);
+            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/foods.json");
 
             HttpURLConnection con = (HttpURLConnection) urlConnection.openConnection();
             con.setDoOutput(true);
@@ -170,7 +171,7 @@ public class Database {
             con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
             con.setRequestMethod("POST");
 // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = new String();
+            String jsonFormattedUserData = " { \"" + username + "\": { \"username\": \"" + username + "\" , } }";
 
             //System.out.println("");
 
