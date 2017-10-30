@@ -26,6 +26,7 @@ public class FoodModel {
     public FoodModel(String name) {
         this.name = name;
         this.consumedAt = new Date();
+        random = new Random();
         this.foodID = random.nextInt(10000);
     }
     
