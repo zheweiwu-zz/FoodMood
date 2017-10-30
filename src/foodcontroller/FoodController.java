@@ -23,6 +23,7 @@ public class FoodController implements ActionListener{
     private AddFoodView afv;
     private NavigationController nc;
     private FoodMoodInsert fmi;
+    private EditFoodView efv;
     
     public FoodController(FoodList foods, NavigationController nc, FoodMoodInsert fmi) {
         this.foods = foods;
@@ -62,9 +63,36 @@ public class FoodController implements ActionListener{
             afv.getF().dispose();
             nc.getMmv().getF().setVisible(true);
         }
+        else if (ae.getSource()==efv.getSave()) {
+            saveFoodChanges();
+        }
     }
 
     public FoodList getFoods() {
         return foods;
+    }
+    
+    private void updateEditFood() {
+        
+        for (FoodModel food: foods.getAllFoods()) {
+            efv.getModel().addRow(new Object[]{food.getName(), food.getConsumedAt(), ""});
+        }
+    }
+
+    private void saveFoodChanges() {
+        for (int i = 0; i<efv.getModel().getRowCount(); i++) {
+            if (efv.getModel().getValueAt(i, 2).equals("delete")) {
+                foods.removeFood(i);
+            }
+            else if (!efv.getModel().getValueAt(i, 2).equals("")) {
+                foods.changeFood(i, new FoodModel((String) efv.getModel().getValueAt(i, 2), foods.getFood(i).getConsumedAt()));
+            }
+        }
+    }
+    
+    public void setEfv(EditFoodView efv) {
+        this.efv = efv;
+        this.updateEditFood();
+        this.efv.getSave().addActionListener(this);
     }
 }

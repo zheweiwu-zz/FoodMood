@@ -28,7 +28,6 @@ public class NavigationController implements ActionListener {
     private FoodController fc;
     private MoodController mc;
     private FoodMoodInsert fmi;
-    EditFoodView efv;
     int userID;
     
     public NavigationController(MainMenuView mmv, FoodList foods, MoodList moods, int user) {
@@ -56,12 +55,7 @@ public class NavigationController implements ActionListener {
             
         }
         else if (ae.getSource()==mmv.getEditEntriesBtn()) {
-            efv = new EditFoodView();
-            this.updateEditFood();
-            efv.getSave().addActionListener(this);
-        }
-        else if (ae.getSource()==efv.getSave()) {
-            saveFoodChanges();
+            fc.setEfv(new EditFoodView());
         }
     }
 
@@ -84,23 +78,4 @@ public class NavigationController implements ActionListener {
         return mc;
     }
     
-    private void updateEditFood() {
-        
-        //efv.getModel().addRow(new Object[]{"Food", "Consumed at", "New Name"});
-        
-        for (FoodModel food: fc.getFoods().getAllFoods()) {
-            efv.getModel().addRow(new Object[]{food.getName(), food.getConsumedAt(), ""});
-        }
-    }
-
-    private void saveFoodChanges() {
-        for (int i = 0; i<efv.getModel().getRowCount(); i++) {
-            if (efv.getModel().getValueAt(i, 2).equals("delete")) {
-                fc.getFoods().removeFood(i);
-            }
-            else if (!efv.getModel().getValueAt(i, 2).equals("")) {
-                fc.getFoods().changeFood(i, new FoodModel((String) efv.getModel().getValueAt(i, 2), fc.getFoods().getFood(i).getConsumedAt()));
-            }
-        }
-    }
 }
