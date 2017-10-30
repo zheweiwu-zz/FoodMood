@@ -16,9 +16,9 @@ public class MoodModel {
     private String description;
     private Date recordedAt;
     
-    public MoodModel(String description, Date recordedAt) {
+    public MoodModel(String description) {
         this.description = description;
-        this.recordedAt = recordedAt;
+        this.recordedAt = new Date();
     }
     
     /**

@@ -6,6 +6,8 @@
 package foodcontroller;
 
 import foodmodel.FoodList;
+import foodmodel.FoodModel;
+import foodmoodpair.FoodMoodInsert;
 import foodview.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +16,7 @@ import navigationcontroller.NavigationController;
  *
  * @author Zhewei
  */
-public class FoodController implements ActionListener{
+public class FoodController extends FoodMoodInsert implements ActionListener{
     
     private FoodList foods;
     private AddFoodView afv;
@@ -38,8 +40,15 @@ public class FoodController implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==afv.getAddBtn()) {
             //add the food
-            afv.getF().dispose();
-            nc.getMmv().getF().setVisible(true);
+            FoodModel newFood = new FoodModel (afv.getFoodName());
+            if (insertFood(newFood)!=null) {
+                foods.addFood(newFood);
+                afv.getF().dispose();
+                nc.getMmv().getF().setVisible(true);
+            }
+            else {
+                System.out.println("Already inserted food");
+            }
         }
     }
 }

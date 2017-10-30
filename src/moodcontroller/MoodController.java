@@ -5,9 +5,12 @@
  */
 package moodcontroller;
 
+import foodmodel.FoodModel;
+import foodmoodpair.FoodMoodInsert;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import moodmodel.MoodList;
+import moodmodel.MoodModel;
 import moodview.AddMoodView;
 import navigationcontroller.NavigationController;
 
@@ -15,11 +18,12 @@ import navigationcontroller.NavigationController;
  *
  * @author Zhewei
  */
-public class MoodController implements ActionListener{
+public class MoodController extends FoodMoodInsert implements ActionListener{
     
     private MoodList moods;
     private AddMoodView amv;
     private NavigationController nc;
+    
     
     public MoodController(MoodList moods, NavigationController nc) {
         this.moods = moods;
@@ -34,8 +38,14 @@ public class MoodController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==amv.getAddBtn()) {
-            amv.getF().dispose();
-            nc.getMmv().getF().setVisible(true);
+            MoodModel newMood = new MoodModel (amv.getMoodDescription());
+            if (insertMood(newMood)!=null) {
+                amv.getF().dispose();
+                nc.getMmv().getF().setVisible(true);
+            }
+            else {
+                System.out.println("Already inserted mood");
+            }
         }
     }
 }
