@@ -7,8 +7,10 @@ package navigationcontroller;
 
 import foodcontroller.FoodController;
 import foodmodel.FoodList;
+import foodmodel.FoodModel;
 import foodmoodpair.FoodMoodInsert;
 import foodview.AddFoodView;
+import foodview.EditFoodView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import moodcontroller.MoodController;
@@ -26,6 +28,7 @@ public class NavigationController implements ActionListener {
     private FoodController fc;
     private MoodController mc;
     private FoodMoodInsert fmi;
+    EditFoodView efv;
     
     public NavigationController(MainMenuView mmv, FoodList foods, MoodList moods) {
         this.mmv = mmv;
@@ -51,7 +54,8 @@ public class NavigationController implements ActionListener {
             
         }
         else if (ae.getSource()==mmv.getEditEntriesBtn()) {
-            
+            efv = new EditFoodView();
+            this.updateEditFood();
         }
     }
 
@@ -72,5 +76,15 @@ public class NavigationController implements ActionListener {
 
     public MoodController getMc() {
         return mc;
+    }
+    
+    private void updateEditFood() {
+        
+        efv.getModel().addRow(new Object[]{"Food", "Consumed at", "New Name"});
+
+        
+        for (FoodModel food: fc.getFoods().getAllFoods()) {
+            efv.getModel().addRow(new Object[]{food.getName(), food.getConsumedAt(), ""});
+        }
     }
 }

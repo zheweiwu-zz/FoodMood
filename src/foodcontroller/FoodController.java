@@ -58,4 +58,8 @@ public class FoodController implements ActionListener{
             nc.getMmv().getF().setVisible(true);
         }
     }
+
+    public FoodList getFoods() {
+        return foods;
+    }
 }

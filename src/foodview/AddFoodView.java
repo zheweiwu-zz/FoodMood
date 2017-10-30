@@ -5,12 +5,10 @@
  */
 package foodview;
 
-import databasecontroller.Database;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.*;

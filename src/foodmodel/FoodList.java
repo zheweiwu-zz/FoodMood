@@ -37,4 +37,8 @@ public class FoodList {
     public FoodModel getFood(int index) {
         return foods.get(index);
     }
+    
+    public ArrayList<FoodModel> getAllFoods() {
+        return foods;
+    }
 }
