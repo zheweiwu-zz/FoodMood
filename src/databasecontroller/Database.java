@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import foodmodel.FoodModel;
+import moodmodel.MoodModel;
 
 /**
  *
@@ -262,9 +263,9 @@ public class Database {
     }
     
      // **************************************************************Moods SECTION***************************************************************************
-    public void POSTMood() throws Exception {
+    public static void POSTMood(MoodModel newMood) throws Exception {
         try {
-            URL urlConnection = new URL(url);
+            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/moods.json");
 
             HttpURLConnection con = (HttpURLConnection) urlConnection.openConnection();
             con.setDoOutput(true);
@@ -274,7 +275,7 @@ public class Database {
             con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
             con.setRequestMethod("POST");
 // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = new String();
+            String jsonFormattedUserData = " { \"" + newMood.getID() + "\": { \"name\": \"" + newMood.getDescription() + "\" , \"date\": \"" + newMood.getRecordedAt() + "\" } }";
 
             //System.out.println("");
 

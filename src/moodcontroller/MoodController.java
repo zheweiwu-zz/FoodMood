@@ -13,6 +13,7 @@ import moodmodel.MoodModel;
 import moodview.AddMoodView;
 import moodview.EditMoodView;
 import navigationcontroller.NavigationController;
+import databasecontroller.Database;
 
 /**
  *
@@ -44,6 +45,10 @@ public class MoodController implements ActionListener{
             MoodModel newMood = new MoodModel (amv.getMoodDescription());
             if (fmi.insertMood(newMood)!=null) {
                 moods.addMood(newMood);
+                try{
+                    Database.POSTMood(newMood);
+                }
+                catch (Exception e){}
                 amv.getF().dispose();
                 nc.getMmv().getF().setVisible(true);
             }

@@ -6,6 +6,7 @@
 package moodmodel;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  *
@@ -15,10 +16,14 @@ public class MoodModel {
     
     private String description;
     private Date recordedAt;
+    private int moodID;
+    private Random random;
     
     public MoodModel(String description) {
         this.description = description;
         this.recordedAt = new Date();
+         random = new Random();
+        this.moodID = random.nextInt(10000);
     }
     
     public MoodModel(String description, Date recordedAt) {
@@ -63,6 +68,11 @@ public class MoodModel {
      * @return information at the index
      */
     public String getInfo(String index) {
-        return description + " " + recordedAt;
+        return description + " " + recordedAt+" "+moodID;
+    }
+    
+    public int getID()
+    {
+        return moodID;
     }
 }
