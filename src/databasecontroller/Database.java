@@ -252,7 +252,7 @@ public class Database {
 
             
           // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = new String();
+            String jsonFormattedUserData = new String("");
             
             
         } 

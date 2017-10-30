@@ -30,9 +30,10 @@ public class FoodModel {
         this.foodID = random.nextInt(10000);
     }
     
-    public FoodModel(String name, Date date) {
+    public FoodModel(String name, Date date, int foodID) {
         this.name = name;
         this.consumedAt = date;
+        this.foodID = foodID;
     }
     /**
      * Get the name of the food
