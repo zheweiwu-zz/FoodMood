@@ -8,3 +8,8 @@ Alex Vesey
     
 
 Zhewei Wu	State Design Pattern (Object oriented design pattern)	This pattern was implemented in the foodmoodpair package. It was used througout the NavigationControl's mainmenu class as well.
+
+Nada Ziab
+
+	Good Defaults Interface Pattern - default date entry in add food and mood views
+	Mediator Design Pattern - food and mood entries will be linked for relations
