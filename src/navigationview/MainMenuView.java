@@ -6,11 +6,8 @@
 package navigationview;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -60,7 +57,7 @@ public class MainMenuView {
         c.gridy = 1;
         p.add(addMoodBtn, c);
         
-        editEntriesBtn = new JButton("Edit Entries");
+        editEntriesBtn = new JButton("Edit Food Entries / type 'delete' or new name in last column");
         c.gridx = 0;
         c.gridy = 2;
         p.add(editEntriesBtn, c);
