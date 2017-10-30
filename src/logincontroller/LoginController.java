@@ -39,7 +39,8 @@ public class LoginController implements ActionListener {
         else if (ae.getSource()==lv.loginBtn) {
             if (Database.authProfile(lv.getUsername(), lv.getPassword())) {
                 MainMenuView mmv = new MainMenuView();
-                NavigationController nc = new NavigationController(mmv, new FoodList(), new MoodList());
+                int userID = 0; // get userid of person with username
+                NavigationController nc = new NavigationController(mmv, new FoodList(), new MoodList(), userID);
                 lv.getF().dispose();
             }
             else {

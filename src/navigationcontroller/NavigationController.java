@@ -29,13 +29,15 @@ public class NavigationController implements ActionListener {
     private MoodController mc;
     private FoodMoodInsert fmi;
     EditFoodView efv;
+    int userID;
     
-    public NavigationController(MainMenuView mmv, FoodList foods, MoodList moods) {
+    public NavigationController(MainMenuView mmv, FoodList foods, MoodList moods, int user) {
         this.mmv = mmv;
         fmi = new FoodMoodInsert();
         fc = new FoodController(foods, this, fmi);
         mc = new MoodController(moods, this, fmi);
         addtheListeners();
+        userID = user;
     }
 
     @Override
@@ -92,6 +94,6 @@ public class NavigationController implements ActionListener {
     }
 
     private void saveFoodChanges() {
-        
+        //efv.getModel().get
     }
 }
