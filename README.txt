@@ -13,3 +13,6 @@ Nada Ziab
 
 	Good Defaults Interface Pattern - default date entry in add food and mood views
 	Mediator Design Pattern - food and mood entries will be linked for relations
+	
+Nathan Lattig
+	Factory Method Pattern (Object oriented design pattern) is implemented in the FoodController and the MoodController. For this pattern when the controller is called to create a new object it passes and integer and itself to the factory. The factory then makes a decision based on the integer of whether to return a new object or return a previously created object with the desired changes. 
