@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import navigationcontroller.NavigationController;
 import databasecontroller.Database;
+import dataobjectmodel.DataObjectModel;
+import java.time.LocalDateTime;
 /**
  *
  * @author Zhewei
@@ -20,15 +22,18 @@ import databasecontroller.Database;
 public class FoodController implements ActionListener{
     
     private FoodList foods;
-    private AddFoodView afv;
+    protected AddFoodView afv;
     private NavigationController nc;
     private FoodMoodInsert fmi;
-    private EditFoodView efv;
+    protected EditFoodView efv;
+    private FoodModelFactory fmf;
     
     public FoodController(FoodList foods, NavigationController nc, FoodMoodInsert fmi) {
         this.foods = foods;
         this.nc = nc;
         this.fmi = fmi;
+        this.fmf = new FoodModelFactory();
+        
     }
 
     public AddFoodView getAfv() {
@@ -45,7 +50,7 @@ public class FoodController implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==afv.getAddBtn()) {
             //add the food
-            FoodModel newFood = new FoodModel (afv.getFoodName());
+            FoodModel newFood = (FoodModel) fmf.getObject(-1, this);
             if (fmi.insertFood(newFood)!=null) {
                 foods.addFood(newFood);
                 try{
@@ -75,7 +80,7 @@ public class FoodController implements ActionListener{
     private void updateEditFood() {
         
         for (FoodModel food: foods.getAllFoods()) {
-            efv.getModel().addRow(new Object[]{food.getName(), food.getConsumedAt(), ""});
+            efv.getModel().addRow(new Object[]{food.getName(), food.getDateTime(), ""});
         }
     }
 
@@ -87,8 +92,10 @@ public class FoodController implements ActionListener{
                 
             }
             else if (!efv.getModel().getValueAt(i, 2).equals("")) {
-                foods.changeFood(i, new FoodModel((String) efv.getModel().getValueAt(i, 2), foods.getFood(i).getConsumedAt(), foods.getFood(i).getID()));
-                Database.updateFoodData(Integer.toString(foods.getFood(i).getID()), efv.getModel().getValueAt(i,1).toString(), foods.getFood(i).getConsumedAt());
+                //unsure if this change process is actually functional, doesn't save changes to interface during runtime - Nate
+                foods.changeFood(i, new FoodModel((String) efv.getModel().getValueAt(i, 2), foods.getFood(i).getDateTime(), foods.getFood(i).getID()));
+                //foods.changeFood(i, fmf.recreateObject(descriptor, LocalDateTime.MAX, i));
+                Database.updateFoodData(Integer.toString(foods.getFood(i).getID()), efv.getModel().getValueAt(i,1).toString(), foods.getFood(i).getDateTime());
             }
         }
     }

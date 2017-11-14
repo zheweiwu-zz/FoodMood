@@ -30,6 +30,7 @@ public class NavigationController implements ActionListener {
     private FoodMoodInsert fmi;
     int userID;
     
+    
     public NavigationController(MainMenuView mmv, FoodList foods, MoodList moods, int user) {
         this.mmv = mmv;
         fmi = new FoodMoodInsert();

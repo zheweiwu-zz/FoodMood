@@ -5,36 +5,39 @@
  */
 package moodmodel;
 
-import java.util.Date;
+import dataobjectmodel.DataObjectModel;
+import java.time.LocalDateTime;
 import java.util.Random;
 
 /**
  *
  * @author Zhewei
  */
-public class MoodModel {
+public class MoodModel implements DataObjectModel{
     
     private String description;
-    private Date recordedAt;
+    private LocalDateTime recordedAt;
     private int moodID;
     private Random random;
     
     public MoodModel(String description) {
         this.description = description;
-        this.recordedAt = new Date();
-         random = new Random();
+        this.recordedAt = LocalDateTime.now();
+        random = new Random();
         this.moodID = random.nextInt(10000);
     }
     
-    public MoodModel(String description, Date recordedAt) {
+    public MoodModel(String description, LocalDateTime recordedAt, int moodID) {
         this.description = description;
         this.recordedAt = recordedAt;
+        this.moodID = moodID;
     }
     
     /**
      * Get the description of the mood
      * @return the description of the mood
      */
+    @Override
     public String getDescription() {
         return this.description;
     }
@@ -43,6 +46,7 @@ public class MoodModel {
      * Set the description of the mood
      * @param description the description of the mood
      */
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
@@ -51,16 +55,18 @@ public class MoodModel {
      * Get when the mood was recorded
      * @return when the mood was recorded
      */
-    public Date getRecordedAt() {
+    @Override
+    public LocalDateTime getDateTime() {
         return recordedAt;
     }
     
     /**
      * Set when the mood was recorded
-     * @param recordedAt when the mood was recorded
+     * @param dateTime when the mood was recorded
      */
-    public void setRecordedAt(Date recordedAt) {
-        this.recordedAt = recordedAt;
+    @Override
+    public void setDate(LocalDateTime dateTime) {
+        this.recordedAt = dateTime;
     }
     /**
      * Get the information at index
@@ -75,4 +81,26 @@ public class MoodModel {
     {
         return moodID;
     }
+
+    /**
+     * Unsupported method for MoodModel
+     * @return 
+     */
+    @Override
+    public String getName() {
+        throw new UnsupportedOperationException("Moods do not support a name.");
+    }
+
+    /**
+     * Unsupported method for MoodModel
+     * @param name 
+     */
+    @Override
+    public void setName(String name) {
+        throw new UnsupportedOperationException("Moods do not support a name.");
+    }
+
+    
+
+    
 }

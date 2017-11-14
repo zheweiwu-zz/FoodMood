@@ -13,6 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import foodmodel.FoodModel;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import moodmodel.MoodModel;
 import java.util.Date;
 /**
@@ -174,7 +175,7 @@ public class Database {
             con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
             con.setRequestMethod("POST");
 // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = " { \"" + newFood.getID() + "\": { \"name\": \"" + newFood.getName() + "\" , \"date\": \"" + newFood.getConsumedAt() + "\" } }";
+            String jsonFormattedUserData = " { \"" + newFood.getID() + "\": { \"name\": \"" + newFood.getName() + "\" , \"date\": \"" + newFood.getDateTime() + "\" } }";
 
             //System.out.println("");
 
@@ -217,7 +218,7 @@ public class Database {
         //return new ProfileModel();
     }
     // this method will take a profilemodel, user data parameter (e.g. weight) and the value of the parameter (e.g. 180)
-    public static void updateFoodData(String foodID, String newFoodName, Date consumedAt)
+    public static void updateFoodData(String foodID, String newFoodName, LocalDateTime consumedAt)
     {
     try {
         String url = "https://foodmood-a4f9d.firebaseio.com/foods/" + foodID + ".json";
@@ -277,7 +278,7 @@ public class Database {
             con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
             con.setRequestMethod("POST");
 // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = " { \"" + newMood.getID() + "\": { \"name\": \"" + newMood.getDescription() + "\" , \"date\": \"" + newMood.getRecordedAt() + "\" } }";
+            String jsonFormattedUserData = " { \"" + newMood.getID() + "\": { \"name\": \"" + newMood.getDescription() + "\" , \"date\": \"" + newMood.getDateTime() + "\" } }";
 
             //System.out.println("");
 

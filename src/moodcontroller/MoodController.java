@@ -22,15 +22,17 @@ import databasecontroller.Database;
 public class MoodController implements ActionListener{
     
     private MoodList moods;
-    private AddMoodView amv;
+    protected AddMoodView amv;
     private NavigationController nc;
     private FoodMoodInsert fmi;
-    private EditMoodView emv;
+    protected EditMoodView emv;
+    private MoodModelFactory mmf;
     
     public MoodController(MoodList moods, NavigationController nc, FoodMoodInsert fmi) {
         this.moods = moods;
         this.nc = nc;
         this.fmi = fmi;
+        mmf = new MoodModelFactory();
     }
 
     public void setAmv(AddMoodView amv) {
@@ -42,7 +44,7 @@ public class MoodController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==amv.getAddBtn()) {
-            MoodModel newMood = new MoodModel (amv.getMoodDescription());
+            MoodModel newMood = (MoodModel) mmf.getObject(-1, this);
             if (fmi.insertMood(newMood)!=null) {
                 moods.addMood(newMood);
                 try{
@@ -72,7 +74,7 @@ public class MoodController implements ActionListener{
     private void updateEditMood() {
         
         for (MoodModel mood: moods.getAllMoods()) {
-            emv.getModel().addRow(new Object[]{mood.getDescription(), mood.getRecordedAt(), ""});
+            emv.getModel().addRow(new Object[]{mood.getDescription(), mood.getDateTime(), ""});
         }
     }
 
@@ -82,7 +84,8 @@ public class MoodController implements ActionListener{
                 moods.removeMood(i);
             }
             else if (!emv.getModel().getValueAt(i, 2).equals("")) {
-                moods.changeMood(i, new MoodModel((String) emv.getModel().getValueAt(i, 2), moods.getMood(i).getRecordedAt()));
+                //unsure if this is working as thier is no interface component to check for saved changes - Nate
+                moods.changeMood(i, new MoodModel((String) emv.getModel().getValueAt(i, 2), moods.getMood(i).getDateTime(), moods.getMood(i).getID()));
             }
         }
     }
