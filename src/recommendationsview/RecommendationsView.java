@@ -9,6 +9,8 @@ import foodrecommendations.FoodRecommendations;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -66,7 +68,18 @@ public class RecommendationsView {
         for (int i = 0; i < foodRecs.getRecommendationsList().size(); i++) {
             c.gridx = 0;
             c.gridy = i + 1;
-            p.add(new JButton(foodRecs.getRecommendationsList().get(i)), c);
+            
+            String foodName = foodRecs.getRecommendationsList().get(i);
+            String foodDesc = foodRecs.getRecommendatiosnMap().get(foodName).toString();
+            JButton btn = new JButton(foodName);
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    RecommendationDetailedView rdv = new RecommendationDetailedView(foodName, foodDesc);
+                }
+                
+            });
+            p.add(btn, c);
         }
         
         returnBtn = new JButton("Return");
