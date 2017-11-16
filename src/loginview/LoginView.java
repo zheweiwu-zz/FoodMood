@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 
 /**
@@ -26,7 +27,8 @@ public class LoginView {
     private JPanel p;
     
     private JLabel usernameLabel, passwordLabel;
-    private JTextField usernameField, passwordField;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
     public JButton loginBtn, createProfileBtn;
     
     /**
@@ -72,7 +74,7 @@ public class LoginView {
         c.gridy = 1;
         p.add(passwordLabel, c);
         
-        passwordField = new JTextField("");
+        passwordField = new JPasswordField("");
         passwordField.setPreferredSize(new Dimension(100, 30));
         c.gridx = 1;
         c.gridy = 1;
