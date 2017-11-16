@@ -17,6 +17,8 @@ import moodcontroller.MoodController;
 import moodmodel.MoodList;
 import moodview.AddMoodView;
 import navigationview.MainMenuView;
+import notificationsview.NotificationsView;
+import recommendationsview.RecommendationsView;
 
 /**
  *
@@ -58,6 +60,12 @@ public class NavigationController implements ActionListener {
         else if (ae.getSource()==mmv.getEditEntriesBtn()) {
             fc.setEfv(new EditFoodView());
         }
+        else if (ae.getSource()==mmv.getViewNotificationsBtn()) {
+            NotificationsView nv = new NotificationsView();
+        }
+        else if (ae.getSource() == mmv.getViewRecommendationsBtn()) {
+            RecommendationsView rv = new RecommendationsView();
+        }
     }
 
     private void addtheListeners() {
@@ -65,6 +73,8 @@ public class NavigationController implements ActionListener {
         mmv.getAddMoodBtn().addActionListener(this);
         mmv.getViewProfileBtn().addActionListener(this);
         mmv.getEditEntriesBtn().addActionListener(this);
+        mmv.getViewNotificationsBtn().addActionListener(this);
+        mmv.getViewRecommendationsBtn().addActionListener(this);
     }
 
     public FoodController getFc() {
