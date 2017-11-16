@@ -8,6 +8,7 @@ package notificationsview;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,8 +23,11 @@ public class NotificationsView {
     private JPanel p;
     
     private JLabel placeholder;
+    private JButton returnBtn;
     
-    
+    /**
+     * default constructor for NotificationsView
+     */
     public NotificationsView() {
         f = new JFrame();
         p = new JPanel();
@@ -42,6 +46,9 @@ public class NotificationsView {
         f.setVisible(true);
     }
     
+    /**
+     * creates UI components
+     */
     private void createComponents() {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
@@ -51,5 +58,18 @@ public class NotificationsView {
         c.gridy = 0;
         p.add(placeholder, c);
         
+        returnBtn = new JButton("Return");
+        c.gridx = 0;
+        c.gridy = 1;
+        p.add(returnBtn, c);
+        
+    }
+    
+    public JButton getReturnBtn() {
+        return returnBtn;
+    }
+    
+    public JFrame getF() {
+        return f;
     }
 }

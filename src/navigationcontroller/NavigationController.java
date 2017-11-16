@@ -17,8 +17,9 @@ import moodcontroller.MoodController;
 import moodmodel.MoodList;
 import moodview.AddMoodView;
 import navigationview.MainMenuView;
+import notificationscontroller.NotificationsController;
 import notificationsview.NotificationsView;
-import recommendationsview.RecommendationsView;
+import recommendatonscontroller.RecommendationsController;
 
 /**
  *
@@ -61,10 +62,14 @@ public class NavigationController implements ActionListener {
             fc.setEfv(new EditFoodView());
         }
         else if (ae.getSource()==mmv.getViewNotificationsBtn()) {
-            NotificationsView nv = new NotificationsView();
+            NotificationsController nc = new NotificationsController(this);
+            nc.setNv();
+            mmv.getF().setVisible(false);
         }
         else if (ae.getSource() == mmv.getViewRecommendationsBtn()) {
-            RecommendationsView rv = new RecommendationsView();
+            RecommendationsController rc = new RecommendationsController(this);
+            rc.setRv();
+            mmv.getF().setVisible(false);
         }
     }
 

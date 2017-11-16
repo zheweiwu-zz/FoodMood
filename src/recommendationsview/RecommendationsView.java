@@ -5,9 +5,11 @@
  */
 package recommendationsview;
 
+import foodrecommendations.FoodRecommendations;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,8 +23,14 @@ public class RecommendationsView {
     private JFrame f;
     private JPanel p;
     
-    private JLabel placeholder;
+    private FoodRecommendations foodRecs;
     
+    private JLabel placeholder;
+    private JButton returnBtn;
+    
+    /**
+     * default constructor for RecommendationsView
+     */
     public RecommendationsView() {
         f = new JFrame();
         p = new JPanel();
@@ -41,13 +49,37 @@ public class RecommendationsView {
         f.setVisible(true);
     }
     
+    /**
+     * creates UI components
+     */
     private void createComponents() {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         
-        placeholder = new JLabel("** Food Recommendations");
+        placeholder = new JLabel("Food Recommendations to Improve Mood");
         c.gridx = 0;
         c.gridy = 0;
-        p.add(placeholder, c);
+       // p.add(placeholder, c);
+        
+        foodRecs = new FoodRecommendations();
+        
+        for (int i = 0; i < foodRecs.getRecommendationsList().size(); i++) {
+            c.gridx = 0;
+            c.gridy = i + 1;
+            p.add(new JButton(foodRecs.getRecommendationsList().get(i)), c);
+        }
+        
+        returnBtn = new JButton("Return");
+        c.gridx = 0;
+        c.gridy = 10;
+        p.add(returnBtn, c);
+    }
+    
+    public JButton getReturnBtn() {
+        return returnBtn;
+    }
+    
+    public JFrame getF() {
+        return f;
     }
 }
