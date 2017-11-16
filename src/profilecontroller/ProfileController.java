@@ -36,7 +36,7 @@ public class ProfileController implements ActionListener {
             }
             else {
                 try { 
-                Database.POSTProfile(cpv.getUsername(), cpv.getPassowrd(), cpv.getAge(), cpv.getWeight());
+                Database.POSTProfile(cpv.getUsername(), cpv.getPassword(), cpv.getAge(), cpv.getWeight());
                 cpv.getF().dispose();
                 LoginView lv = new LoginView();
                 LoginController lc = new LoginController(lv);

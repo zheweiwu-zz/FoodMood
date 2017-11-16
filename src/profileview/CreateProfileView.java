@@ -115,7 +115,7 @@ public class CreateProfileView {
      * gets password input
      * @return password as a String
      */
-    public String getPassowrd() {
+    public String getPassword() {
         return passwordField.getText();
     }
     
