@@ -59,7 +59,35 @@ public class Database {
         return false;
     }
     
-    
+    /**
+     * checks for existing profile, returns true if profile exists
+     * @param username the username to be checked
+     */
+    public static boolean checkProfile(String username) {
+        String url = "https://foodmood-a4f9d.firebaseio.com/profiles/" + username + ".json";
+        String inputLine;
+       
+        //System.out.println(url);
+        try {
+            URL urlConnect = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
+            con.setDoOutput(true);
+            con.setDoInput(true);
+            con.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            inputLine = in.readLine();
+            
+            System.out.print(inputLine);
+
+        if (inputLine.contains(username)) {
+            return true;
+        }
+
+        } catch (IOException e) {
+        
+        }
+        return false;
+    }
     
 //This method should take a ProfileModel object.
     public static void POSTProfile(String username, String password, String age, String weight) throws Exception {

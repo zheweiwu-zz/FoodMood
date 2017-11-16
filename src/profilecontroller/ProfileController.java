@@ -30,13 +30,19 @@ public class ProfileController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==cpv.createBtn) {
-            try { 
+             
+            if (Database.checkProfile(cpv.getUsername())) {
+                System.out.println("Error: profile already exists");
+            }
+            else {
+                try { 
                 Database.POSTProfile(cpv.getUsername(), cpv.getPassowrd(), cpv.getAge(), cpv.getWeight());
                 cpv.getF().dispose();
                 LoginView lv = new LoginView();
                 LoginController lc = new LoginController(lv);
             } catch (Exception ex) {
                 Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             }
         }
     }
