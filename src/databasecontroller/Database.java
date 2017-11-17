@@ -245,6 +245,30 @@ public class Database {
         // This will construct a profile model object.
         //return new ProfileModel();
     }
+    public static String readAllFoodData() {
+        String url = "https://foodmood-a4f9d.firebaseio.com/foods.json";
+        String inputLine = "";
+        //System.out.println(url);
+        try {
+            URL urlConnect = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
+            con.setDoOutput(true);
+            con.setDoInput(true);
+            con.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+
+            inputLine = in.readLine();
+
+            //System.out.println(inputLine);//testline
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // This will construct a profile model object.
+        //return new ProfileModel();
+        return inputLine;
+    }
+    
     // this method will take a profilemodel, user data parameter (e.g. weight) and the value of the parameter (e.g. 180)
     public static void updateFoodData(String foodID, String newFoodName, LocalDateTime consumedAt)
     {
