@@ -1,4 +1,9 @@
 
+*********************************************Refactoring***************************************************
+Alex Vesey	- Renamed methods in the ProfileController and LoginView classes
+		- Started to decompose the Databse class into smaller classes, including the Readuser Data Class	
+
+********************************************Design Patterns************************************************
 Alex Vesey
     Chain of Command Design Pattern (Object oriented design pattern)
         This design pattern is implemented in all of the View classes. For this pattern the buttons in the view class are listened for and acted upon by the controller classes. 
