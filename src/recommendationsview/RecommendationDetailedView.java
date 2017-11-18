@@ -23,6 +23,11 @@ public class RecommendationDetailedView {
     
     private String food, description;
     
+    /**
+     * constructor for RecommendationDetailedView
+     * @param food the food name
+     * @param description the description of the food
+     */
     public RecommendationDetailedView(String food, String description) {
         f = new JFrame();
         p = new JPanel();
@@ -42,6 +47,9 @@ public class RecommendationDetailedView {
         f.setVisible(true);
     }
     
+    /**
+     * creates UI components
+     */
     private void createComponents() {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;

@@ -3,6 +3,10 @@
 Alex Vesey	- Renamed methods in the ProfileController and LoginView classes
 		- Started to decompose the Databse class into smaller classes, including the Readuser Data Class	
 
+Nada Ziab
+        - Fixed authentication issue related to null entries in LoginController
+        - Started adding more documentation, mostly in 'recommendation' classes
+
 ********************************************Design Patterns************************************************
 Alex Vesey
     Chain of Command Design Pattern (Object oriented design pattern)

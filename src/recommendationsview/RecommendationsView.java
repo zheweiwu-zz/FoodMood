@@ -88,10 +88,18 @@ public class RecommendationsView {
         p.add(returnBtn, c);
     }
     
+    /**
+     * 
+     * @return JButton return
+     */
     public JButton getReturnBtn() {
         return returnBtn;
     }
     
+    /**
+     * get the JFrame component
+     * @return JFrame f
+     */
     public JFrame getF() {
         return f;
     }

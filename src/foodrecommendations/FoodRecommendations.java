@@ -29,10 +29,10 @@ public class FoodRecommendations {
         recommendationsList.add("Chocolate");
         
         foodRecommendationsMap = new HashMap();
-        foodRecommendationsMap.put("Salmon", "description placeholder");
-        foodRecommendationsMap.put("Spinach", "description placeholder");
-        foodRecommendationsMap.put("Blueberries", "description placeholder");
-        foodRecommendationsMap.put("Chocolate", "description placeholder");
+        foodRecommendationsMap.put("Salmon", "lowers risk of depression");
+        foodRecommendationsMap.put("Spinach", "positively impacts serotonin levels and boosts mood");
+        foodRecommendationsMap.put("Blueberries", "associated with having a more positive mood");
+        foodRecommendationsMap.put("Chocolate", "increases feelings of contentment");
         
     }
     
