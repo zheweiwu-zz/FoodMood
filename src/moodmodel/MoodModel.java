@@ -17,17 +17,18 @@ public class MoodModel implements DataObjectModel{
     
     private String description;
     private LocalDateTime recordedAt;
-    private int moodID;
-    private Random random;
+    private String moodID;
+   //private Random random;
+    private String parentFoodID;
     
     public MoodModel(String description) {
         this.description = description;
         this.recordedAt = LocalDateTime.now();
-        random = new Random();
-        this.moodID = random.nextInt(10000);
+        //random = new Random();
+        this.moodID = parentFoodID + recordedAt.toString();
     }
     
-    public MoodModel(String description, LocalDateTime recordedAt, int moodID) {
+    public MoodModel(String description, LocalDateTime recordedAt, String moodID) {
         this.description = description;
         this.recordedAt = recordedAt;
         this.moodID = moodID;
@@ -77,7 +78,7 @@ public class MoodModel implements DataObjectModel{
         return description + " " + recordedAt+" "+moodID;
     }
     
-    public int getID()
+    public String getID()
     {
         return moodID;
     }
