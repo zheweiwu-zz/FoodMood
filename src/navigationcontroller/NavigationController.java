@@ -31,10 +31,10 @@ public class NavigationController implements ActionListener {
     private FoodController fc;
     private MoodController mc;
     private FoodMoodInsert fmi;
-    int userID;
+    private String userID;
     
     
-    public NavigationController(MainMenuView mmv, FoodList foods, MoodList moods, int user) {
+    public NavigationController(MainMenuView mmv, FoodList foods, MoodList moods, String user) {
         this.mmv = mmv;
         fmi = new FoodMoodInsert();
         fc = new FoodController(foods, this, fmi);
@@ -92,6 +92,10 @@ public class NavigationController implements ActionListener {
 
     public MoodController getMc() {
         return mc;
+    }
+    
+    public String getUserID(){
+        return userID;
     }
     
 }
