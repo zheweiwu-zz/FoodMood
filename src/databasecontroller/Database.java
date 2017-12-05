@@ -203,7 +203,7 @@ public class Database {
             con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
             con.setRequestMethod("POST");
 // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = " { \"" + newFood.getID() + "\": { \"name\": \"" + newFood.getName() + "\" , \"date\": \"" + newFood.getDateTime() + "\" } }";
+            String jsonFormattedUserData = " { \"" + newFood.getID() + "\": { \"name\": \"" + newFood.getName() + "\" , \"date\": \"" + newFood.getDateTime() + "\"  , \"userID\": \"" + newFood.getParentUserID() + "\" } }";
 
             //System.out.println("");
 
