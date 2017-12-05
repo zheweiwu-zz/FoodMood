@@ -41,7 +41,7 @@ public class FoodModelFactory implements IDataObjectFactory{
         FoodController fc = (FoodController) foodController;
         String userID = fc.nc.getUserID();
         String name = fc.afv.getFoodName();
-        DataObjectModel newFood = new FoodModel(name, userID);
+        DataObjectModel newFood = new FoodModel(name,userID);
         return newFood;
     }
 
