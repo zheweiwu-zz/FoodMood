@@ -9,6 +9,7 @@ import dataobjectmodel.DataObjectModel;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
+import moodmodel.MoodList;
 
 /**
  *
@@ -18,8 +19,10 @@ public class FoodModel implements DataObjectModel{
     
     private String name;
     private LocalDateTime consumedAt;
-    private int foodID;
+    private String foodID;
     private Random random;
+    private String parentUserID;
+    private MoodList linkedMoods;
     
     public FoodModel() {
         System.out.println("FoodModel instantiated");
@@ -29,10 +32,10 @@ public class FoodModel implements DataObjectModel{
         this.name = name;
         this.consumedAt = LocalDateTime.now();
         random = new Random();
-        this.foodID = random.nextInt(10000);
+        this.foodID = consumedAt.toString() + "FoodName";
     }
     
-    public FoodModel(String name, LocalDateTime date, int foodID) {
+    public FoodModel(String name, LocalDateTime date, String foodID) {
         this.name = name;
         this.consumedAt = date;
         this.foodID = foodID;
@@ -86,8 +89,16 @@ public class FoodModel implements DataObjectModel{
      * Get the ID of the food
      * @return ID of the food
      */
-    public int getID() {
+    public String getID() {
         return foodID;
+    }
+    
+    public String getParentUserID(){
+        return parentUserID;
+    }
+    
+    public void getMoodList(MoodList linkedMoods){
+        //get moodlist
     }
 
     

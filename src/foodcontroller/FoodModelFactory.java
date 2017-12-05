@@ -39,8 +39,9 @@ public class FoodModelFactory implements IDataObjectFactory{
     @Override
     public DataObjectModel createNewObject(ActionListener foodController) {
         FoodController fc = (FoodController) foodController;
+        String userID = fc.nc.getUserID();
         String name = fc.afv.getFoodName();
-        DataObjectModel newFood = new FoodModel(name);
+        DataObjectModel newFood = new FoodModel(name, userID);
         return newFood;
     }
 

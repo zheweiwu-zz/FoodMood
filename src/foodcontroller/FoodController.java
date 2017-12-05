@@ -87,15 +87,11 @@ public class FoodController implements ActionListener{
     private void saveFoodChanges() {
         for (int i = 0; i<efv.getModel().getRowCount(); i++) {
             if (efv.getModel().getValueAt(i, 2).equals("delete")) {
-                foods.removeFood(i);
-                
-                
+                foods.removeFood(i);   
             }
             else if (!efv.getModel().getValueAt(i, 2).equals("")) {
-                //unsure if this change process is actually functional, doesn't save changes to interface during runtime - Nate
                 foods.changeFood(i, new FoodModel((String) efv.getModel().getValueAt(i, 2), foods.getFood(i).getDateTime(), foods.getFood(i).getID()));
-                //foods.changeFood(i, fmf.recreateObject(descriptor, LocalDateTime.MAX, i));
-                Database.updateFoodData(Integer.toString(foods.getFood(i).getID()), efv.getModel().getValueAt(i,1).toString(), foods.getFood(i).getDateTime());
+                Database.updateFoodData(foods.getFood(i).getID(), efv.getModel().getValueAt(i,2).toString(), foods.getFood(i).getDateTime());
             }
         }
     }
