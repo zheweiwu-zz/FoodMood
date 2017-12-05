@@ -23,7 +23,7 @@ public class FoodController implements ActionListener{
     
     private FoodList foods;
     protected AddFoodView afv;
-    private NavigationController nc;
+    protected NavigationController nc;
     private FoodMoodInsert fmi;
     protected EditFoodView efv;
     private FoodModelFactory fmf;

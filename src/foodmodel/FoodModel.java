@@ -28,11 +28,12 @@ public class FoodModel implements DataObjectModel{
         System.out.println("FoodModel instantiated");
     }
     
-    public FoodModel(String name) {
+    public FoodModel(String name, String userID) {
         this.name = name;
         this.consumedAt = LocalDateTime.now();
-        random = new Random();
+        //random = new Random();
         this.foodID = consumedAt.toString() + "FoodName";
+        this.parentUserID = userID;
     }
     
     public FoodModel(String name, LocalDateTime date, String foodID) {
