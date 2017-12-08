@@ -39,7 +39,7 @@ public class FoodModel implements DataObjectModel{
         this.consumedAt = dtf.format(consumedAtDT);
         //random = new Random();
         this.foodID = this.name+consumedAt;
-        this.parentUserID = Database.lastFoodID;
+        this.parentUserID = Database.username;
     }
     
     public FoodModel(String name, LocalDateTime date, String foodID) {

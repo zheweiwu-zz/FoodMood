@@ -25,11 +25,18 @@ public class Database {
     
     public static String url = "https://foodmood-a4f9d.firebaseio.com/";
     public static String url2 = "https://foodmood-a4f9d.firebaseio.com/profiles.json";
-    private String username;
+    public static String username;
     private String password;
     public static String lastFoodID;
+    private static Database instance = null;
     
-    public Database() {}
+    
+    
+    public static Database getInstance()
+    {
+    if(instance == null){instance = new Database();}
+    return instance;
+    }
     //*********************************************************************Profile Section********************************************************************
  
     public static boolean authProfile(String username, String password)
@@ -53,6 +60,7 @@ public class Database {
 
          if (inputLine.contains(username) && inputLine.contains(password))
          {
+             Database.username = username;
          return true;
          }
 //System.out.println("Holy shit it works!");
@@ -82,6 +90,7 @@ public class Database {
             System.out.print(inputLine);
 
         if (inputLine.contains(username)) {
+            Database.username = username;
             return true;
         }
 
@@ -197,7 +206,7 @@ public class Database {
         try {
             Database.lastFoodID = newFood.getID();
             System.out.print(newFood.getInfo());
-            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/profiles/" + newFood.getParentUserID() + "/.json");
+            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/profiles/" + Database.username + "/.json");
 
             HttpsURLConnection con = (HttpsURLConnection) urlConnection.openConnection();
             con.setDoOutput(true);
@@ -324,7 +333,7 @@ public class Database {
      // **************************************************************Moods SECTION***************************************************************************
     public static void POSTMood(MoodModel newMood) throws Exception {
         try {
-            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/profiles/" + newMood.getUserID() + "/.json");
+            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/profiles/" + Database.username + "/"+ Database.lastFoodID +"/.json");
 
             HttpURLConnection con = (HttpURLConnection) urlConnection.openConnection();
             con.setDoOutput(true);

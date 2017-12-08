@@ -30,15 +30,15 @@ public class MoodModel implements DataObjectModel{
         this.recordedAtDT = LocalDateTime.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hhmmssddmmyyyy");
         this.recordedAt = dtf.format(recordedAtDT);
-        //random = new Random();
-        this.moodID = parentFoodID + recordedAt;
+        this.parentFoodID = Database.lastFoodID;
+        this.moodID = this.parentFoodID + recordedAt;
     }
     
     public MoodModel(String description, LocalDateTime recordedAt, String moodID) {
         this.description = description;
         this.recordedAtDT = recordedAt;
         this.moodID = moodID;
-        this.userID = Database.lastFoodID;
+        this.userID = Database.username;
     }
     
     public String getUserID()
