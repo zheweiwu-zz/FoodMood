@@ -5,8 +5,10 @@
  */
 package moodmodel;
 
+import databasecontroller.Database;
 import dataobjectmodel.DataObjectModel;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 /**
@@ -16,22 +18,32 @@ import java.util.Random;
 public class MoodModel implements DataObjectModel{
     
     private String description;
-    private LocalDateTime recordedAt;
+    private LocalDateTime recordedAtDT;
+    private String recordedAt;
     private String moodID;
+    private String userID;
    //private Random random;
     private String parentFoodID;
     
     public MoodModel(String description) {
         this.description = description;
-        this.recordedAt = LocalDateTime.now();
+        this.recordedAtDT = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hhmmssddmmyyyy");
+        this.recordedAt = dtf.format(recordedAtDT);
         //random = new Random();
-        this.moodID = parentFoodID + recordedAt.toString();
+        this.moodID = parentFoodID + recordedAt;
     }
     
     public MoodModel(String description, LocalDateTime recordedAt, String moodID) {
         this.description = description;
-        this.recordedAt = recordedAt;
+        this.recordedAtDT = recordedAt;
         this.moodID = moodID;
+        this.userID = Database.lastFoodID;
+    }
+    
+    public String getUserID()
+    {
+        return userID;
     }
     
     /**
@@ -58,7 +70,7 @@ public class MoodModel implements DataObjectModel{
      */
     @Override
     public LocalDateTime getDateTime() {
-        return recordedAt;
+        return recordedAtDT;
     }
     
     /**
@@ -67,7 +79,7 @@ public class MoodModel implements DataObjectModel{
      */
     @Override
     public void setDate(LocalDateTime dateTime) {
-        this.recordedAt = dateTime;
+        this.recordedAtDT = dateTime;
     }
     /**
      * Get the information at index

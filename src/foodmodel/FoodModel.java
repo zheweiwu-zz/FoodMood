@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
 import moodmodel.MoodList;
+import databasecontroller.Database;
+
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -18,7 +21,8 @@ import moodmodel.MoodList;
 public class FoodModel implements DataObjectModel{
     
     private String name;
-    private LocalDateTime consumedAt;
+    private LocalDateTime consumedAtDT;
+    private String consumedAt;
     private String foodID;
     private Random random;
     private String parentUserID;
@@ -30,15 +34,17 @@ public class FoodModel implements DataObjectModel{
     
     public FoodModel(String name, String userID) {
         this.name = name;
-        this.consumedAt = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hhmmssddmmyyyy");
+        this.consumedAtDT = LocalDateTime.now();
+        this.consumedAt = dtf.format(consumedAtDT);
         //random = new Random();
-        this.foodID = consumedAt.toString() + "FoodName";
-        this.parentUserID = userID;
+        this.foodID = this.name+consumedAt;
+        this.parentUserID = Database.lastFoodID;
     }
     
     public FoodModel(String name, LocalDateTime date, String foodID) {
         this.name = name;
-        this.consumedAt = date;
+        this.consumedAtDT = date;
         this.foodID = foodID;
     }
     
@@ -66,7 +72,7 @@ public class FoodModel implements DataObjectModel{
      */
     @Override
     public LocalDateTime getDateTime() {
-        return consumedAt.truncatedTo(ChronoUnit.SECONDS);
+        return consumedAtDT.truncatedTo(ChronoUnit.SECONDS);
     }
     
     /**
@@ -75,7 +81,7 @@ public class FoodModel implements DataObjectModel{
      */
     @Override
     public void setDate(LocalDateTime dateTime) {
-        this.consumedAt = dateTime;
+        this.consumedAtDT = dateTime;
     }
     
     /**

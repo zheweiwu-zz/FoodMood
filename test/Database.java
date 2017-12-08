@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import javax.net.ssl.HttpsURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import foodmodel.FoodModel;
@@ -27,7 +26,6 @@ public class Database {
     public static String url2 = "https://foodmood-a4f9d.firebaseio.com/profiles.json";
     private String username;
     private String password;
-    public static String lastFoodID;
     
     public Database() {}
     //*********************************************************************Profile Section********************************************************************
@@ -195,11 +193,9 @@ public class Database {
     // **************************************************************FOODS SECTION***************************************************************************
     public static void POSTFood(FoodModel newFood) throws Exception {
         try {
-            Database.lastFoodID = newFood.getID();
-            System.out.print(newFood.getInfo());
-            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/profiles/" + newFood.getParentUserID() + "/.json");
+            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/foods.json");
 
-            HttpsURLConnection con = (HttpsURLConnection) urlConnection.openConnection();
+            HttpURLConnection con = (HttpURLConnection) urlConnection.openConnection();
             con.setDoOutput(true);
             con.setDoInput(true);
             con.setRequestProperty("Content-Type", "application/json");
@@ -324,7 +320,7 @@ public class Database {
      // **************************************************************Moods SECTION***************************************************************************
     public static void POSTMood(MoodModel newMood) throws Exception {
         try {
-            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/profiles/" + newMood.getUserID() + "/.json");
+            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/moods.json");
 
             HttpURLConnection con = (HttpURLConnection) urlConnection.openConnection();
             con.setDoOutput(true);
