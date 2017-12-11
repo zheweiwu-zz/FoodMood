@@ -8,6 +8,7 @@ package profilecontroller;
 import databasecontroller.Database;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logincontroller.LoginController;
@@ -31,18 +32,24 @@ public class ProfileController implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==cpv.createBtn) {
              
-            if (Database.checkProfile(cpv.getUsername())) {
-                System.out.println("Error: profile already exists");
-            }
-            else {
-                try { 
-                Database.POSTProfile(cpv.getUsername(), cpv.getPassword(), cpv.getAge(), cpv.getWeight());
-                cpv.getF().dispose();
-                LoginView lv = new LoginView();
-                LoginController lc = new LoginController(lv);
-            } catch (Exception ex) {
+            try {
+                if (Database.checkProfile(cpv.getUsername())) {
+                    System.out.println("Error: profile already exists");
+                }
+                else {
+                    try {
+                        Database.POSTProfile(cpv.getUsername(), cpv.getPassword(), cpv.getAge(), cpv.getWeight());
+                        cpv.getF().dispose();
+                        LoginView lv = new LoginView();
+                        LoginController lc = new LoginController(lv);
+                    } catch (Exception ex) {
+                        Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } catch (SQLException ex) {
+                Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

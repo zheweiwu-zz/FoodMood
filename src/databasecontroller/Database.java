@@ -5,15 +5,7 @@
  */
 package databasecontroller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import javax.net.ssl.HttpsURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import foodmodel.FoodModel;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -76,38 +68,8 @@ public class Database {
 //This method should take a ProfileModel object.
     public static void POSTProfile(String username, String password, String age, String weight) throws Exception {
         Database db = getInstance();
-        db.insertSql("INSERT into users (username, password, age, weight) VALUES ('"+Database.username+"','"+password+"','"+age+"', '"+weight+"')");
-        
-        //for firebase
-        /*
-        try {
-            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/profiles.json");
-
-            HttpURLConnection con = (HttpURLConnection) urlConnection.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("Content-Type", "application/json");
-            con.setRequestProperty("Accept", "application/json");
-            con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
-            con.setRequestMethod("POST");
-// User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = "{ \"" + username + "\": { \"username\": \"" + username + "\" , \"password\" :\"" + password + "\" , \"age\" :\"" + age + "\" , \"weight\" :\"" + weight + "\" } }";
-
-            try ( //System.out.println("");
-                    OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream())) {
-                osw.write(jsonFormattedUserData);
-                osw.flush();
-            }
-
-            if (con.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
-                System.out.print("HTTP code : "
-                        + con.getResponseCode());
-            }
-
-        } catch (MalformedURLException e) {
-            System.out.print("URL Malformed");
-        }*/
-
+        //System.out.println("INSERT into users (username, password, age, weight) VALUES ('"+username+"','"+password+"','"+age+"', '"+weight+"')");
+        db.insertSql("insert into users (username, password, age, weight) values('"+username+"','"+password+"','"+age+"', '"+weight+"')");
     }
     
     // This method should return a profile model object.
@@ -115,29 +77,6 @@ public class Database {
         
         Database db = getInstance();
         ResultSet results = db.getRows("SELECT * FROM users WHERE username='"+Database.username+"'");
-        
-        /*
-        //for firebase
-        String url = "https://foodmood-a4f9d.firebaseio.com/profiles/" + username + ".json";
-        String inputLine = "";
-        //System.out.println(url);
-        try {
-            URL urlConnect = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-
-            inputLine = in.readLine();
-
-            //System.out.println(inputLine);//testline
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // This will construct a profile model object.
-        //return new ProfileModel();*/
     }
     
     // this method will take a profilemodel, user data parameter (e.g. weight) and the value of the parameter (e.g. 180)
@@ -158,24 +97,6 @@ public class Database {
        }catch (SQLException e){
            e.printStackTrace();
        }
-    
-       /*
-    //for firebase   
-    try {
-        String url = "https://foodmood-a4f9d.firebaseio.com/profiles/" + username + ".json";
-            URL urlConnect = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
-            con.setRequestMethod("POST");            
-          // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = new String();
-        } 
-    catch (Exception e) 
-        {
-            e.printStackTrace();
-        }*/    
     }
     
     // this method will take a ProfileModel object
@@ -194,28 +115,6 @@ public class Database {
        }catch (SQLException e){
            e.printStackTrace();
        }
-    
-       /*
-    //for firebase
-    try {
-            String url = "https://foodmood-a4f9d.firebaseio.com/profiles/" + username + ".json";
-            URL urlConnect = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
-            con.setRequestMethod("POST");
-
-            
-          // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = new String();
-            
-            
-        } 
-    catch (Exception e) 
-        {
-            e.printStackTrace();
-        }*/
     }
     
     // **************************************************************FOODS SECTION***************************************************************************
@@ -229,56 +128,7 @@ public class Database {
         
         Database db = getInstance();
         ResultSet results = db.getRows("SELECT * FROM foods WHERE userid='"+Database.username+"'");        
-        
-        /*
-        //for firebase
-        String url = "https://foodmood-a4f9d.firebaseio.com/foods/" + foodID + ".json";
-        String inputLine = "";
-        //System.out.println(url);
-        try {
-            URL urlConnect = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-
-            inputLine = in.readLine();
-
-            //System.out.println(inputLine);//testline
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // This will construct a profile model object.
-        //return new ProfileModel();*/
     }
-    
-    /*
-    //Nate - not sure if this is still needed seems redundant to readFoodData
-    public static String readAllFoodData() {
-        String url = "https://foodmood-a4f9d.firebaseio.com/foods.json";
-        String inputLine = "";
-        //System.out.println(url);
-        try {
-            URL urlConnect = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-
-            inputLine = in.readLine();
-
-            //System.out.println(inputLine);//testline
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // This will construct a profile model object.
-        //return new ProfileModel();
-        return inputLine;
-    }*/
     
     // this method will take a profilemodel, user data parameter (e.g. weight) and the value of the parameter (e.g. 180)
     public static void updateFoodData(String foodID, String newFoodName, LocalDateTime consumedAt, String colToUpdate, String colValue, String condition, String conditionValue)throws ClassNotFoundException, SQLException
@@ -300,25 +150,6 @@ public class Database {
        }catch (SQLException e){
            e.printStackTrace();
        }
-    
-       /*
-    //for firebase
-    try {
-        String url = "https://foodmood-a4f9d.firebaseio.com/foods/" + foodID + ".json";
-            URL urlConnect = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
-            con.setRequestMethod("POST");            
-          // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = " { \"name\": \"" + newFoodName + "\" , \"date\": \"" + consumedAt + "\" } ";           
-        } 
-    catch (Exception e) 
-        {
-            e.printStackTrace();
-        }*/
-    
     }
     // this method will take a ProfileModel object
     public void deleteFoodData(String foodID, String condition, String conditionValue) throws ClassNotFoundException, SQLException
@@ -336,66 +167,13 @@ public class Database {
        }catch (SQLException e){
            e.printStackTrace();
        }
-        
-        /*
-        for firebase
-    try {
-            String url = "https://foodmood-a4f9d.firebaseio.com/foods/" + foodID + ".json";
-            URL urlConnect = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
-            con.setRequestMethod("POST");
-
-            
-          // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = new String("");
-            
-            
-        } 
-    catch (Exception e) 
-        {
-            e.printStackTrace();
-        }*/
     }
     
      // **************************************************************Moods SECTION***************************************************************************
     public static void POSTMood(MoodModel newMood) throws Exception {
         
         Database db = getInstance();
-        db.insertSql("INSERT into moods (userid, mood, moodid, datetime, associated foodID) VALUES ('"+Database.username+"','"+newMood.getDescription()+"', ' "+newMood.getID()+"', '"+newMood.getDateTime().toString()+"', '"+newMood.getParentFoodID()+"')");
-        
-        /*
-        for firebase
-        try {
-            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/profiles/" + Database.username + "/" +"/.json");
-
-            HttpURLConnection con = (HttpURLConnection) urlConnection.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("Content-Type", "application/json");
-            con.setRequestProperty("Accept", "application/json");
-            con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
-            con.setRequestMethod("POST");
-// User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = " { \"" + newMood.getID() + "\": { \"name\": \"" + newMood.getDescription() + "\" , \"date\": \"" + newMood.getDateTime() + "\" } }";
-
-            //System.out.println("");
-
-            OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream());
-            osw.write(jsonFormattedUserData);
-            osw.flush();
-            osw.close();
-
-            if (con.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
-                System.out.print("HTTP code : "
-                        + con.getResponseCode());
-            }
-
-        } catch (MalformedURLException e) {
-            System.out.print("URL Malformed");
-        }*/
+        //db.insertSql("INSERT into moods (userid, mood, moodid, datetime, associated foodID) VALUES ('"+Database.username+"','"+newMood.getDescription()+"', ' "+newMood.getID()+"', '"+newMood.getDateTime().toString()+"', '"+newMood.getParentFoodID()+"')");
 
     }
     // This method should return a profile model object.
@@ -403,29 +181,6 @@ public class Database {
         
         Database db = getInstance();
         ResultSet results = db.getRows("SELECT * FROM foods WHERE userid='"+Database.username+"'");
-        
-        /*
-        for firebase
-        String url = "https://foodmood-a4f9d.firebaseio.com/moods/" + moodID + ".json";
-        String inputLine = "";
-        //System.out.println(url);
-        try {
-            URL urlConnect = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-
-            inputLine = in.readLine();
-
-            //System.out.println(inputLine);//testline
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // This will construct a profile model object.
-        //return new ProfileModel(); */
     }
     
     // this method will take a profilemodel, user data parameter (e.g. weight) and the value of the parameter (e.g. 180)
@@ -447,28 +202,6 @@ public class Database {
        }catch (SQLException e){
            e.printStackTrace();
        }
-        
-        /*
-        for firebase
-    try {
-        String url = "https://foodmood-a4f9d.firebaseio.com/foods/" + moodID + ".json";
-            URL urlConnect = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
-            con.setRequestMethod("POST");
-
-            
-          // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = new String();
-            
-            
-        } 
-    catch (Exception e) 
-        {
-            e.printStackTrace();
-        }*/
     
     }
     
@@ -488,28 +221,6 @@ public class Database {
        }catch (SQLException e){
            e.printStackTrace();
        }
-        
-        /*
-        for firebase
-    try {
-            String url = "https://foodmood-a4f9d.firebaseio.com/foods/" + moodID + ".json";
-            URL urlConnect = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
-            con.setRequestMethod("POST");
-
-            
-          // User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = new String();
-            
-            
-        } 
-    catch (Exception e) 
-        {
-            e.printStackTrace();
-        }*/
     }
     
     public void insertSql(String sql) throws SQLException {

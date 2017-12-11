@@ -13,8 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import navigationcontroller.NavigationController;
 import databasecontroller.Database;
-import dataobjectmodel.DataObjectModel;
-import java.time.LocalDateTime;
 /**
  *
  * @author Zhewei
@@ -91,7 +89,7 @@ public class FoodController implements ActionListener{
             }
             else if (!efv.getModel().getValueAt(i, 2).equals("")) {
                 foods.changeFood(i, new FoodModel((String) efv.getModel().getValueAt(i, 2), foods.getFood(i).getDateTime(), foods.getFood(i).getID()));
-                Database.updateFoodData(foods.getFood(i).getID(), efv.getModel().getValueAt(i,2).toString(), foods.getFood(i).getDateTime());
+                //Database.updateFoodData(foods.getFood(i).getID(), efv.getModel().getValueAt(i,2).toString(), foods.getFood(i).getDateTime());
             }
         }
     }
