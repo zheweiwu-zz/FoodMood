@@ -30,7 +30,7 @@ public class MoodModel implements DataObjectModel{
         this.recordedAtDT = LocalDateTime.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hhmmssddmmyyyy");
         this.recordedAt = dtf.format(recordedAtDT);
-        this.parentFoodID = Database.lastFoodID;
+        //this.parentFoodID = Database.lastFoodID;
         this.moodID = this.parentFoodID + recordedAt;
     }
     
