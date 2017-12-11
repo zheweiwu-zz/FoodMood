@@ -83,14 +83,14 @@ public class Database {
     public void updateProfileData(String username, String colToUpdate, String colValue, String condition, String conditionValue)throws ClassNotFoundException, SQLException
     {
         Database db = getInstance();
-        String sql = "UPDATE users SET ? = ? , "
-                + "WHERE ? = ?";
+        String set = colToUpdate;
+        String cond = condition;
+        String sql = "UPDATE users SET "+set+" = ? , "
+                + "WHERE "+cond+" = ?";
        try{ PreparedStatement pstmt = connection.prepareStatement(sql);
         
-        pstmt.setString(1,colToUpdate);
-        pstmt.setString(2,colValue);
-        pstmt.setString(3,condition);
-        pstmt.setString(4,conditionValue);   
+        pstmt.setString(1,colValue);
+        pstmt.setString(2,conditionValue);   
         sql = pstmt.toString();
         pstmt = null;
         db.getRows(sql);
@@ -127,7 +127,8 @@ public class Database {
     public static void readFoodData(String foodID)throws ClassNotFoundException, SQLException{
         
         Database db = getInstance();
-        ResultSet results = db.getRows("SELECT * FROM foods WHERE userid='"+Database.username+"'");        
+        ResultSet results = db.getRows("SELECT * FROM foods WHERE userid='"+Database.username+"'");
+        
     }
     
     // this method will take a profilemodel, user data parameter (e.g. weight) and the value of the parameter (e.g. 180)
@@ -136,14 +137,14 @@ public class Database {
         //newFoodName and consumedAt can probably be removed
         
         Database db = getInstance();
-        String sql = "UPDATE foods SET ? = ? , "
-                + "WHERE ? = ?";
+        String set = colToUpdate;
+        String cond = condition;
+        String sql = "UPDATE users SET "+set+" = ? , "
+                + "WHERE "+cond+" = ?";
        try{ PreparedStatement pstmt = connection.prepareStatement(sql);
         
-        pstmt.setString(1,colToUpdate);
-        pstmt.setString(2,colValue);
-        pstmt.setString(3,condition);
-        pstmt.setString(4,conditionValue);   
+        pstmt.setString(1,colValue);
+        pstmt.setString(2,conditionValue);    
         sql = pstmt.toString();
         pstmt = null;
         db.getRows(sql);
@@ -188,14 +189,14 @@ public class Database {
     {
         
         Database db = getInstance();
-        String sql = "UPDATE users SET ? = ? , "
-                + "WHERE ? = ?";
+        String set = colToUpdate;
+        String cond = condition;
+        String sql = "UPDATE users SET "+set+" = ? , "
+                + "WHERE "+cond+" = ?";
        try{ PreparedStatement pstmt = connection.prepareStatement(sql);
         
-        pstmt.setString(1,colToUpdate);
-        pstmt.setString(2,colValue);
-        pstmt.setString(3,condition);
-        pstmt.setString(4,conditionValue);   
+        pstmt.setString(1,colValue);
+        pstmt.setString(2,conditionValue);    
         sql = pstmt.toString();
         pstmt = null;
         db.getRows(sql);
@@ -235,13 +236,12 @@ public class Database {
     
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Database db = new Database();
-        db.insertSql("drop table if exists users");
-        db.insertSql("create table users (id integer PRIMARY KEY, username text, password text, age text, weight text)");
-        db.insertSql("insert into users (username, password, age, weight) values ('zhewei', 'password', '21', '150')");
-        db.insertSql("drop table if exists foods");
-        db.insertSql("drop table if exists moods");
-        db.insertSql("create table foods (id integer PRIMARY KEY, userid integer, food text, foodid text, datetime text)");
-        db.insertSql("create table moods (id integer PRIMARY KEY, userid integer, mood text, moodid text, datetime text, foodid text)");
+        ResultSet rs = db.getRows("SELECT * FROM foods");
+        while(rs.next()){
+            System.out.println(rs.getString("datetime"));
+    }
+        
+        
     }
         
 }
