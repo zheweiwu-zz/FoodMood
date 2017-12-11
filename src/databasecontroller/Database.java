@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import moodmodel.MoodModel;
 /**
  *
@@ -124,33 +126,25 @@ public class Database {
     }
     
     // This method should return a profile model object.
-    public static void readFoodData(String foodID)throws ClassNotFoundException, SQLException{
+    public static ArrayList<FoodModel> readFoodData()throws ClassNotFoundException, SQLException{
         
         Database db = getInstance();
         ResultSet results = db.getRows("SELECT * FROM foods WHERE userid='"+Database.username+"'");
+        ArrayList<FoodModel> foods = new ArrayList<>();
+        while (results.next()) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+            LocalDateTime dateTime = LocalDateTime.parse(results.getString("datetime"), formatter);
+            foods.add(new FoodModel(results.getString("food"), dateTime, "1"));
+        }
+        return foods;
         
     }
     
     // this method will take a profilemodel, user data parameter (e.g. weight) and the value of the parameter (e.g. 180)
-    public static void updateFoodData(String foodID, String newFoodName, LocalDateTime consumedAt, String colToUpdate, String colValue, String condition, String conditionValue)throws ClassNotFoundException, SQLException
+    public static void updateFoodData(String id, String newName)throws ClassNotFoundException, SQLException
     {
-        //newFoodName and consumedAt can probably be removed
-        
         Database db = getInstance();
-        String set = colToUpdate;
-        String cond = condition;
-        String sql = "UPDATE users SET "+set+" = ? , "
-                + "WHERE "+cond+" = ?";
-       try{ PreparedStatement pstmt = connection.prepareStatement(sql);
-        
-        pstmt.setString(1,colValue);
-        pstmt.setString(2,conditionValue);    
-        sql = pstmt.toString();
-        pstmt = null;
-        db.getRows(sql);
-       }catch (SQLException e){
-           e.printStackTrace();
-       }
+        db.insertSql("UPDATE food SET food = '"+newName+"' WHERE id = '"+id+"'");
     }
     // this method will take a ProfileModel object
     public void deleteFoodData(String foodID, String condition, String conditionValue) throws ClassNotFoundException, SQLException
