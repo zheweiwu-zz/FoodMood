@@ -525,11 +525,12 @@ public class Database {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Database db = new Database();
         db.insertSql("drop table if exists users");
-        db.insertSql("create table users (id integer PRIMARY KEY, username text, password text, weight text)");
-        db.insertSql("insert into users (username, password, weight) values ('zhewei', 'password', '150')");
+        db.insertSql("create table users (id integer PRIMARY KEY, username text, password text, age text, weight text)");
+        db.insertSql("insert into users (username, password, age, weight) values ('zhewei', 'password', '21', '150')");
         db.insertSql("drop table if exists foods");
         db.insertSql("drop table if exists moods");
-        db.insertSql("create table foods (id integer PRIMARY KEY, userid integer, food text, datetime text)");
-        db.insertSql("create table moods (id integer PRIMARY KEY, userid integer, food text, datetime text)");
+        db.insertSql("create table foods (id integer PRIMARY KEY, userid integer, food text, foodid text, datetime text)");
+        db.insertSql("create table moods (id integer PRIMARY KEY, userid integer, mood text, moodid text, datetime text, foodid text)");
     }
+        
 }
