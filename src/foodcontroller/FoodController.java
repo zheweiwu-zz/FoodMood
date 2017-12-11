@@ -78,17 +78,17 @@ public class FoodController implements ActionListener{
     private void updateEditFood() {
         
         for (FoodModel food: foods.getAllFoods()) {
-            efv.getModel().addRow(new Object[]{food.getName(), food.getDateTime(), ""});
+            efv.getModel().addRow(new Object[]{food.getID(), food.getName(), food.getDateTime(), ""});
         }
     }
 
     private void saveFoodChanges() {
         for (int i = 0; i<efv.getModel().getRowCount(); i++) {
-            if (efv.getModel().getValueAt(i, 2).equals("delete")) {
+            if (efv.getModel().getValueAt(i, 3).equals("delete")) {
                 // remove food from database upon running
                 foods.removeFood(i);   
             }
-            else if (!efv.getModel().getValueAt(i, 2).equals("")) {
+            else if (!efv.getModel().getValueAt(i, 3).equals("")) {
                 foods.changeFood(i, new FoodModel((String) efv.getModel().getValueAt(i, 2), foods.getFood(i).getDateTime(), foods.getFood(i).getID()));
                 //Database.updateFoodData(foods.getFood(i).getID(), efv.getModel().getValueAt(i,2).toString(), foods.getFood(i).getDateTime());
             }
