@@ -24,18 +24,20 @@ public class MoodModel implements DataObjectModel{
     private String userID;
    //private Random random;
     private String parentFoodID;
+    private int moodRating;
     
-    public MoodModel(String description) {
-        this.description = description;
+    public MoodModel(int rating) {
+        this.moodRating = rating;
         this.recordedAtDT = LocalDateTime.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hhmmssddmmyyyy");
         this.recordedAt = dtf.format(recordedAtDT);
+        this.userID = Database.username;
         //this.parentFoodID = Database.lastFoodID;
-        this.moodID = this.parentFoodID + recordedAt;
+        this.moodID = this.userID + recordedAt;
     }
     
-    public MoodModel(String description, LocalDateTime recordedAt, String moodID) {
-        this.description = description;
+    public MoodModel(int rating, LocalDateTime recordedAt, String moodID) {
+        //this.description = description;
         this.recordedAtDT = recordedAt;
         this.moodID = moodID;
         this.userID = Database.username;
@@ -111,6 +113,25 @@ public class MoodModel implements DataObjectModel{
     @Override
     public void setName(String name) {
         throw new UnsupportedOperationException("Moods do not support a name.");
+    }
+
+    /**
+     * @return the parentFoodID
+     */
+    public String getParentFoodID() {
+        return parentFoodID;
+    }
+
+    /**
+     * @return the moodRating
+     */
+    public int getMoodRating() {
+        return moodRating;
+    }
+
+    @Override
+    public String toString() {
+        return "MoodModel{" + "description=" + description + ", recordedAtDT=" + recordedAtDT + ", recordedAt=" + recordedAt + ", moodID=" + moodID + ", userID=" + userID + ", parentFoodID=" + parentFoodID + ", moodRating=" + getMoodRating() + '}';
     }
 
     

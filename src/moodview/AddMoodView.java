@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 /**
@@ -36,6 +37,11 @@ public class AddMoodView {
     private JComboBox months, timePeriod;
     private JButton addBtn;
     private JButton returnButton;
+    private JSlider moodRating;
+    private final int RATING_MIN = 0;
+    private final int RATING_INIT = 3;
+    private final int RATING_MAX = 5;
+    
     
     /**
      * default constructor for AddMoodUI
@@ -67,16 +73,27 @@ public class AddMoodView {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         
-        moodDescrLabel = new JLabel("Mood Description");
+        
+        
+        moodDescrLabel = new JLabel("Mood Rating");
         c.gridx = 0;
         c.gridy = 0;
         p.add(moodDescrLabel, c);
         
-        moodDescrField = new JTextField("");
+        moodRating = new JSlider(JSlider.HORIZONTAL, RATING_MIN, RATING_MAX, RATING_INIT);        
+        moodRating.setMajorTickSpacing(1);
+        moodRating.setPaintTicks(true);
+        moodRating.setPaintLabels(true);
+        c.gridx = 1;
+        c.gridy = 0;
+        p.add(moodRating, c);
+        
+        
+        /*moodDescrField = new JTextField("");
         moodDescrField.setPreferredSize(new Dimension(100, 30));
         c.gridx = 1;
         c.gridy = 0;
-        p.add(moodDescrField, c);
+        p.add(moodDescrField, c);*/
         
         moodDateLabel = new JLabel("Date Recorded");
         c.gridx = 0;
@@ -168,5 +185,9 @@ public class AddMoodView {
     
     public JButton getReturn() {
         return returnButton;
+    }
+    
+    public JSlider getRating(){
+        return moodRating;
     }
 }

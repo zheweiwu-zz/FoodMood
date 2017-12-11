@@ -19,6 +19,8 @@ import moodview.AddMoodView;
 import navigationview.MainMenuView;
 import notificationscontroller.NotificationsController;
 import notificationsview.NotificationsView;
+import profilecontroller.ProfileController;
+import profilecontroller.ProfileViewController;
 import recommendatonscontroller.RecommendationsController;
 
 /**
@@ -56,7 +58,9 @@ public class NavigationController implements ActionListener {
             mmv.getF().setVisible(false);
         }
         else if (ae.getSource()==mmv.getViewProfileBtn()) {
-            
+            ProfileViewController pc = new ProfileViewController(this);
+            pc.setPCView();
+            mmv.getF().setVisible(false);
         }
         else if (ae.getSource()==mmv.getEditEntriesBtn()) {
             fc.setEfv(new EditFoodView());

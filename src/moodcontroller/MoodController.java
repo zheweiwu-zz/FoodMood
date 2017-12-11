@@ -14,6 +14,9 @@ import moodview.AddMoodView;
 import moodview.EditMoodView;
 import navigationcontroller.NavigationController;
 import databasecontroller.Database;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -45,7 +48,9 @@ public class MoodController implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==amv.getAddBtn()) {
             MoodModel newMood = (MoodModel) mmf.getObject(-1, this);
-            if (fmi.insertMood(newMood)!=null) {
+            System.out.println(newMood.toString());
+            if (newMood!=null) {
+                fmi.insertMood(newMood);
                 moods.addMood(newMood);
                 try{
                     Database.POSTMood(newMood);
@@ -74,7 +79,7 @@ public class MoodController implements ActionListener{
     private void updateEditMood() {
         
         for (MoodModel mood: moods.getAllMoods()) {
-            emv.getModel().addRow(new Object[]{mood.getDescription(), mood.getDateTime(), ""});
+            //emv.getModel().addRow(new Object[]{mood.getDescription(), mood.getDateTime(), ""});
         }
     }
 
@@ -85,7 +90,7 @@ public class MoodController implements ActionListener{
             }
             else if (!emv.getModel().getValueAt(i, 2).equals("")) {
                 //unsure if this is working as thier is no interface component to check for saved changes - Nate
-                moods.changeMood(i, new MoodModel((String) emv.getModel().getValueAt(i, 2), moods.getMood(i).getDateTime(), moods.getMood(i).getID()));
+                //moods.changeMood(i, new MoodModel((String) emv.getModel().getValueAt(i, 2), moods.getMood(i).getDateTime(), moods.getMood(i).getID()));
             }
         }
     }
@@ -95,4 +100,6 @@ public class MoodController implements ActionListener{
         this.updateEditMood();
         this.emv.getSave().addActionListener(this);
     }
+
+    
 }

@@ -11,6 +11,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Random;
 import moodmodel.MoodList;
 import databasecontroller.Database;
+import java.io.Serializable;
 
 import java.time.format.DateTimeFormatter;
 
@@ -18,7 +19,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Zhewei
  */
-public class FoodModel implements DataObjectModel{
+public class FoodModel implements DataObjectModel, Serializable{
     
     private String name;
     private LocalDateTime consumedAtDT;

@@ -38,8 +38,8 @@ public class MoodModelFactory implements IDataObjectFactory{
     @Override
     public DataObjectModel createNewObject(ActionListener moodController) {
         MoodController mc = (MoodController) moodController;
-        String name = mc.amv.getMoodDescription();
-        DataObjectModel newMood = new MoodModel(name);
+        int rating = mc.amv.getRating().getValue();
+        DataObjectModel newMood = new MoodModel(rating);
         return newMood;
     }
 
@@ -47,7 +47,7 @@ public class MoodModelFactory implements IDataObjectFactory{
     public DataObjectModel recreateObject(int i, ActionListener moodController) {
         MoodController mc = (MoodController) moodController;
         MoodList moods = mc.getMoods();         
-        return new MoodModel((String)mc.emv.getModel().getValueAt(i, 2), moods.getMood(i).getDateTime(), moods.getMood(i).getID());        
+        return new MoodModel((int) mc.emv.getModel().getValueAt(i, 2), moods.getMood(i).getDateTime(), moods.getMood(i).getID());        
     }
 
     
