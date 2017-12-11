@@ -19,7 +19,7 @@ public class MainMenuView {
     private JFrame f;
     private JPanel p;
     
-    private JButton addFoodBtn, addMoodBtn, viewProfileBtn, editEntriesBtn, viewNotificationsBtn, viewRecommendationsBtn;
+    private JButton addFoodBtn, addMoodBtn, viewProfileBtn, editEntriesBtn, viewRecommendationsBtn;
     
     /**
      * default constructor for MainMenuUI
@@ -66,11 +66,6 @@ public class MainMenuView {
         c.gridx = 0;
         c.gridy = 3;
         p.add(viewProfileBtn, c);
-        
-        viewNotificationsBtn = new JButton("View Notifications");
-        c.gridx = 0;
-        c.gridy = 4;
-        p.add(viewNotificationsBtn, c);
         
         viewRecommendationsBtn = new JButton("View Food Recommendations");
         c.gridx = 0;
