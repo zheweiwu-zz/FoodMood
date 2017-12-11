@@ -103,12 +103,12 @@ public class Database {
     public void deleteProfileData(String username, String condition, String conditionValue) throws ClassNotFoundException, SQLException
     {
         Database db = getInstance();
+        String cond = condition;
         String sql = "DELETE FROM users, "
-                + "WHERE ? = ?";
+                + "WHERE "+cond+" = ?";
        try{ PreparedStatement pstmt = connection.prepareStatement(sql);
         
-        pstmt.setString(1,condition);
-        pstmt.setString(2,conditionValue);   
+        pstmt.setString(1,conditionValue);   
         sql = pstmt.toString();
         pstmt = null;
         db.getRows(sql);
@@ -156,12 +156,12 @@ public class Database {
     public void deleteFoodData(String foodID, String condition, String conditionValue) throws ClassNotFoundException, SQLException
     {
         Database db = getInstance();
-        String sql = "DELETE FROM foods, "
-                + "WHERE ? = ?";
+        String cond = condition;
+        String sql = "DELETE FROM users, "
+                + "WHERE "+cond+" = ?";
        try{ PreparedStatement pstmt = connection.prepareStatement(sql);
         
-        pstmt.setString(1,condition);
-        pstmt.setString(2,conditionValue);   
+        pstmt.setString(1,conditionValue);    
         sql = pstmt.toString();
         pstmt = null;
         db.getRows(sql);
@@ -210,12 +210,12 @@ public class Database {
     public void deleteMoodData(String moodID,String condition, String conditionValue) throws ClassNotFoundException, SQLException
     {
         Database db = getInstance();
-        String sql = "DELETE FROM foods, "
-                + "WHERE ? = ?";
+        String cond = condition;
+        String sql = "DELETE FROM users, "
+                + "WHERE "+cond+" = ?";
        try{ PreparedStatement pstmt = connection.prepareStatement(sql);
         
-        pstmt.setString(1,condition);
-        pstmt.setString(2,conditionValue);   
+        pstmt.setString(1,conditionValue);   
         sql = pstmt.toString();
         pstmt = null;
         db.getRows(sql);
