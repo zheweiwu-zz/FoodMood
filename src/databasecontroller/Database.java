@@ -14,59 +14,49 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import foodmodel.FoodModel;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import moodmodel.MoodModel;
-import java.util.Date;
 /**
  *
  * @author Alex
  */
 public class Database {
     
-    public static String url = "https://foodmood-a4f9d.firebaseio.com/";
-    public static String url2 = "https://foodmood-a4f9d.firebaseio.com/profiles.json";
+    private static Connection connection = null;
+    private static Statement statement;
     public static String username;
     private String password;
-    public static String lastFoodID;
-    private static Database instance = null;
+    private static Database db;
     
+    private Database() throws ClassNotFoundException, SQLException {
+        Class.forName("org.sqlite.JDBC");
+        connection = DriverManager.getConnection("jdbc:sqlite:FoodMood.db");
+        statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+    }
     
-    
-    public static Database getInstance()
+    public static Database getInstance() throws ClassNotFoundException, SQLException
     {
-    if(instance == null){instance = new Database();}
-    return instance;
+        if(connection == null){db = new Database();}
+        return db;
     }
     //*********************************************************************Profile Section********************************************************************
  
-    public static boolean authProfile(String username, String password)
+    public static boolean authProfile(String username, String password) throws ClassNotFoundException, SQLException
     {
-     String url = "https://foodmood-a4f9d.firebaseio.com/profiles/" + username + ".json";
-        String inputLine;
-       
-        //System.out.println(url);
-        try {
-            URL urlConnect = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) urlConnect.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-
-            inputLine = in.readLine();
-            
-            System.out.print(inputLine);
-
-         if (inputLine.contains(username) && inputLine.contains(password))
-         {
-             Database.username = username;
-         return true;
-         }
-//System.out.println("Holy shit it works!");
-        } catch (IOException e) {
+        Database db = getInstance();
+        ResultSet results = db.getRows("SELECT * FROM users WHERE username='"+username+"'");
+        String pw = null;
+        while (results.next()) {
+            pw = results.getString("password");
+            System.out.println(pw);
         }
-        return false;
+        return password.equals(pw);
     }
     
     /**
@@ -204,7 +194,6 @@ public class Database {
     // **************************************************************FOODS SECTION***************************************************************************
     public static void POSTFood(FoodModel newFood) throws Exception {
         try {
-            Database.lastFoodID = newFood.getID();
             System.out.print(newFood.getInfo());
             URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/profiles/" + Database.username + "/.json");
 
@@ -333,7 +322,7 @@ public class Database {
      // **************************************************************Moods SECTION***************************************************************************
     public static void POSTMood(MoodModel newMood) throws Exception {
         try {
-            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/profiles/" + Database.username + "/"+ Database.lastFoodID +"/.json");
+            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/profiles/" + Database.username + "/" +"/.json");
 
             HttpURLConnection con = (HttpURLConnection) urlConnection.openConnection();
             con.setDoOutput(true);
@@ -432,5 +421,21 @@ public class Database {
             e.printStackTrace();
         }
     }
+    
+    public void insertSql(String sql) throws SQLException {
+        statement.executeUpdate(sql);
+    }
 
+    public ResultSet getRows(String sql) throws SQLException {
+        ResultSet rs = statement.executeQuery(sql);
+        return rs;
+    }
+
+    
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        Database db = new Database();
+        db.insertSql("drop table if exists users");
+        db.insertSql("create table users (id integer PRIMARY KEY, username text, password text, weight text)");
+        db.insertSql("insert into users (username, password, weight) values ('zhewei', 'password', '150')");
+    }
 }
