@@ -13,6 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import navigationcontroller.NavigationController;
 import databasecontroller.Database;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Zhewei
@@ -67,7 +70,13 @@ public class FoodController implements ActionListener{
             nc.getMmv().getF().setVisible(true);
         }
         else if (ae.getSource()==efv.getSave()) {
-            saveFoodChanges();
+            try {
+                saveFoodChanges();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(FoodController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -82,15 +91,16 @@ public class FoodController implements ActionListener{
         }
     }
 
-    private void saveFoodChanges() {
+    private void saveFoodChanges() throws ClassNotFoundException, SQLException {
         for (int i = 0; i<efv.getModel().getRowCount(); i++) {
             if (efv.getModel().getValueAt(i, 3).equals("delete")) {
                 // remove food from database upon running
-                foods.removeFood(i);   
+                foods.removeFood(i);
+                Database.deleteFoodData(efv.getModel().getValueAt(i, 0).toString());
             }
             else if (!efv.getModel().getValueAt(i, 3).equals("")) {
-                foods.changeFood(i, new FoodModel((String) efv.getModel().getValueAt(i, 2), foods.getFood(i).getDateTime(), foods.getFood(i).getID()));
-                //Database.updateFoodData(foods.getFood(i).getID(), efv.getModel().getValueAt(i,2).toString(), foods.getFood(i).getDateTime());
+                foods.changeFood(i, new FoodModel((String) efv.getModel().getValueAt(i, 3), foods.getFood(i).getDateTime(), foods.getFood(i).getID()));
+                Database.updateFoodData(efv.getModel().getValueAt(i, 0).toString(),efv.getModel().getValueAt(i, 3).toString());
             }
         }
     }

@@ -149,21 +149,9 @@ public class Database {
     }
 
     // this method will take a ProfileModel object
-    public void deleteFoodData(String foodID, String condition, String conditionValue) throws ClassNotFoundException, SQLException {
+    public static void deleteFoodData(String foodID) throws ClassNotFoundException, SQLException {
         Database db = getInstance();
-        String cond = condition;
-        String sql = "DELETE FROM users, "
-                + "WHERE " + cond + " = ?";
-        try {
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-
-            pstmt.setString(1, conditionValue);
-            sql = pstmt.toString();
-            pstmt = null;
-            db.getRows(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        db.insertSql("DELETE from foods WHERE id='"+foodID+"'");
     }
 
     // **************************************************************Moods SECTION***************************************************************************
@@ -232,13 +220,13 @@ public class Database {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Database db = new Database();
-        db.insertSql("drop table if exists users");
-        db.insertSql("create table users (id integer PRIMARY KEY, username text, password text, age text, weight text)");
-        db.insertSql("insert into users (username, password, weight) values ('zhewei', 'password', '22' ,'150')");
-        db.insertSql("drop table if exists foods");
-        db.insertSql("drop table if exists moods");
-        db.insertSql("create table foods (id integer PRIMARY KEY, userid integer, food text, datetime text)");
-        db.insertSql("create table moods (id integer PRIMARY KEY, userid integer, mood text, datetime text)");
+//        db.insertSql("drop table if exists users");
+//        db.insertSql("create table users (id integer PRIMARY KEY, username text, password text, age text, weight text)");
+//        db.insertSql("insert into users (username, password, weight) values ('zhewei', 'password', '22' ,'150')");
+//        db.insertSql("drop table if exists foods");
+//        db.insertSql("drop table if exists moods");
+//        db.insertSql("create table foods (id integer PRIMARY KEY, userid integer, food text, datetime text)");
+//        db.insertSql("create table moods (id integer PRIMARY KEY, userid integer, mood text, datetime text)");
 
     }
 

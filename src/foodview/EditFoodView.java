@@ -21,7 +21,7 @@ public class EditFoodView {
     
     private JFrame frame;
     private JPanel panel;
-    private Object[] columnNames = {"Food", "Date entered", "New food"};
+    private Object[] columnNames = {"id", "Food", "Date entered", "New food"};
     private JTable foodEntries;
     private DefaultTableModel model;
     private JButton saveChanges;
