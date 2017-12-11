@@ -175,36 +175,8 @@ public class Database {
     }
     // **************************************************************FOODS SECTION***************************************************************************
     public static void POSTFood(FoodModel newFood) throws Exception {
-        try {
-            System.out.print(newFood.getInfo());
-            URL urlConnection = new URL("https://foodmood-a4f9d.firebaseio.com/profiles/" + Database.username + "/.json");
-
-            HttpsURLConnection con = (HttpsURLConnection) urlConnection.openConnection();
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestProperty("Content-Type", "application/json");
-            con.setRequestProperty("Accept", "application/json");
-            con.setRequestProperty("X-HTTP-Method-Override", "PATCH");
-            con.setRequestMethod("POST");
-// User profile info gets translated into JSON to be used in the next line. Use .getname() kinda stuff.
-            String jsonFormattedUserData = " { \"" + newFood.getID() + "\": { \"name\": \"" + newFood.getName() + "\" , \"date\": \"" + newFood.getDateTime() + "\" , \"userID\": \"" + newFood.getParentUserID() + "\" } }";
-
-            //System.out.println("");
-
-            OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream());
-            osw.write(jsonFormattedUserData);
-            osw.flush();
-            osw.close();
-
-            if (con.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
-                System.out.print("HTTP code : "
-                        + con.getResponseCode());
-            }
-
-        } catch (MalformedURLException e) {
-            System.out.print("URL Malformed");
-        }
-
+        Database db = getInstance();
+        db.insertSql("INSERT into foods (userid, food, datetime) VALUES ('"+Database.username+"','"+newFood.getName()+"', '"+newFood.getDateTime().toString()+"')");
     }
     // This method should return a profile model object.
     public static void readFoodData(String foodID) {
@@ -419,5 +391,9 @@ public class Database {
         db.insertSql("drop table if exists users");
         db.insertSql("create table users (id integer PRIMARY KEY, username text, password text, weight text)");
         db.insertSql("insert into users (username, password, weight) values ('zhewei', 'password', '150')");
+        db.insertSql("drop table if exists foods");
+        db.insertSql("drop table if exists moods");
+        db.insertSql("create table foods (id integer PRIMARY KEY, userid integer, food text, datetime text)");
+        db.insertSql("create table moods (id integer PRIMARY KEY, userid integer, food text, datetime text)");
     }
 }
