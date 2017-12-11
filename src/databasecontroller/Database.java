@@ -56,6 +56,9 @@ public class Database {
             pw = results.getString("password");
             System.out.println(pw);
         }
+        if (password.equals(pw)) {
+            Database.username = username;
+        }
         return password.equals(pw);
     }
     
