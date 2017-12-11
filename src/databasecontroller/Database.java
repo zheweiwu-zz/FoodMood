@@ -145,7 +145,7 @@ public class Database {
     // this method will take a profilemodel, user data parameter (e.g. weight) and the value of the parameter (e.g. 180)
     public static void updateFoodData(String id, String newName) throws ClassNotFoundException, SQLException {
         Database db = getInstance();
-        db.insertSql("UPDATE food SET food = '" + newName + "' WHERE id = '" + id + "'");
+        db.insertSql("UPDATE foods SET food = '" + newName + "' WHERE id = '" + id + "'");
     }
 
     // this method will take a ProfileModel object
