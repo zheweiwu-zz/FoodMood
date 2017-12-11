@@ -79,7 +79,6 @@ public class NavigationController implements ActionListener {
         mmv.getAddMoodBtn().addActionListener(this);
         mmv.getViewProfileBtn().addActionListener(this);
         mmv.getEditEntriesBtn().addActionListener(this);
-        mmv.getViewNotificationsBtn().addActionListener(this);
         mmv.getViewRecommendationsBtn().addActionListener(this);
     }
 
