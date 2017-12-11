@@ -63,11 +63,6 @@ public class NavigationController implements ActionListener {
         else if (ae.getSource()==mmv.getEditEntriesBtn()) {
             fc.setEfv(new EditFoodView());
         }
-        else if (ae.getSource()==mmv.getViewNotificationsBtn()) {
-            NotificationsController nc = new NotificationsController(this);
-            nc.setNv();
-            mmv.getF().setVisible(false);
-        }
         else if (ae.getSource() == mmv.getViewRecommendationsBtn()) {
             RecommendationsController rc = new RecommendationsController(this);
             rc.setRv();
