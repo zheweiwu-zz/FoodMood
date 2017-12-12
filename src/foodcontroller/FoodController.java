@@ -60,6 +60,7 @@ public class FoodController implements ActionListener{
                 catch (Exception e){}
                 afv.getF().dispose();
                 nc.getMmv().getF().setVisible(true);
+                nc.startTimer();
             }
             else {
                 System.out.println("Already inserted food");

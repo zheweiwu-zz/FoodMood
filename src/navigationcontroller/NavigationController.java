@@ -13,6 +13,8 @@ import foodview.AddFoodView;
 import foodview.EditFoodView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import moodcontroller.MoodController;
 import moodmodel.MoodList;
 import moodview.AddMoodView;
@@ -34,7 +36,7 @@ public class NavigationController implements ActionListener {
     private MoodController mc;
     private FoodMoodInsert fmi;
     private String userID;
-    
+    private Timer tim;
     
     public NavigationController(MainMenuView mmv, FoodList foods, MoodList moods, String user) {
         this.mmv = mmv;
@@ -65,15 +67,14 @@ public class NavigationController implements ActionListener {
         else if (ae.getSource()==mmv.getEditEntriesBtn()) {
             fc.setEfv(new EditFoodView());
         }
-        else if (ae.getSource()==mmv.getViewNotificationsBtn()) {
-            NotificationsController nc = new NotificationsController(this);
-            nc.setNv();
-            mmv.getF().setVisible(false);
-        }
         else if (ae.getSource() == mmv.getViewRecommendationsBtn()) {
             RecommendationsController rc = new RecommendationsController(this);
             rc.setRv();
             mmv.getF().setVisible(false);
+        }
+        else if (ae.getSource() == tim) {
+            tim.stop();
+            JOptionPane.showMessageDialog(mmv.getF(), "It is time to insert a mood!");
         }
     }
 
@@ -82,7 +83,6 @@ public class NavigationController implements ActionListener {
         mmv.getAddMoodBtn().addActionListener(this);
         mmv.getViewProfileBtn().addActionListener(this);
         mmv.getEditEntriesBtn().addActionListener(this);
-        mmv.getViewNotificationsBtn().addActionListener(this);
         mmv.getViewRecommendationsBtn().addActionListener(this);
     }
 
@@ -100,6 +100,11 @@ public class NavigationController implements ActionListener {
     
     public String getUserID(){
         return userID;
+    }
+    
+    public void startTimer(){
+        tim = new Timer(5000, this);
+        tim.start();
     }
     
 }
