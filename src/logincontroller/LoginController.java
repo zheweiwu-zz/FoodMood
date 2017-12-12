@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import loginview.*;
 import moodmodel.MoodList;
 import navigationcontroller.NavigationController;
@@ -48,7 +49,7 @@ public class LoginController implements ActionListener {
                     lv.getF().dispose();
                 }
                 else {
-                    System.out.println("Error authenticating");
+                          JOptionPane.showMessageDialog(lv.getF(), "It is time to insert a mood!");
                 }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
