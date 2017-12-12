@@ -13,6 +13,9 @@ import foodview.AddFoodView;
 import foodview.EditFoodView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import moodcontroller.MoodController;
@@ -60,8 +63,16 @@ public class NavigationController implements ActionListener {
             mmv.getF().setVisible(false);
         }
         else if (ae.getSource()==mmv.getViewProfileBtn()) {
-            ProfileViewController pc = new ProfileViewController(this);
-            pc.setPCView();
+            ProfileViewController pc;
+            try {
+                pc = new ProfileViewController(this);
+                pc.setPCView();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(NavigationController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(NavigationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             mmv.getF().setVisible(false);
         }
         else if (ae.getSource()==mmv.getEditEntriesBtn()) {

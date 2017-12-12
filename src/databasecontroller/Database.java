@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import moodmodel.MoodModel;
+import profilemodel.ProfileModel;
 
 /**
  *
@@ -77,10 +78,13 @@ public class Database {
     }
 
     // This method should return a profile model object.
-    public void readProfileData(String username) throws ClassNotFoundException, SQLException {
-
+    public static ArrayList<ProfileModel> readProfileData(String username) throws ClassNotFoundException, SQLException {
+        ArrayList<ProfileModel> profiles = new ArrayList();
         Database db = getInstance();
         ResultSet results = db.getRows("SELECT * FROM users WHERE username='" + Database.username + "'");
+        ProfileModel profileData = new ProfileModel(results.getString("username"), results.getString("age"), results.getString("weight"));
+        profiles.add(profileData);
+        return profiles;
     }
 
     // this method will take a profilemodel, user data parameter (e.g. weight) and the value of the parameter (e.g. 180)

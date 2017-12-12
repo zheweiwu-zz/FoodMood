@@ -8,6 +8,8 @@ package profilecontroller;
 import databasecontroller.Database;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logincontroller.LoginController;
@@ -24,12 +26,13 @@ public class ProfileViewController implements ActionListener {
         
     NavigationController nc;
     ProfileView pv;
-    public ProfileModel pm;
+    private ArrayList<ProfileModel> pmList;
         
-    public ProfileViewController (NavigationController nc){
+    public ProfileViewController (NavigationController nc) throws ClassNotFoundException, SQLException{
         this.nc = nc;
-        //Database.readProfileData(Database.username);
-        //this.pm = Database.userProfile;
+        pmList = new ArrayList();
+        pmList = Database.readProfileData(Database.username);
+       
     }
 
     @Override
@@ -42,6 +45,8 @@ public class ProfileViewController implements ActionListener {
     }
     public void setPCView() {
         pv = new ProfileView(this);
+        ProfileModel pm = new ProfileModel(pmList.get(0).getUsername(),pmList.get(0).getAge(), pmList.get(0).getWeight());
+        pv.getModel().addRow(new Object[]{pm.getUsername(), pm.getAge(), pm.getWeight()});
         pv.getReturnBtn().addActionListener(this);
     }
     

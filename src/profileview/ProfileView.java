@@ -18,14 +18,20 @@ package profileview;
 
 import databasecontroller.Database;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.Arrays;
+import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import profilecontroller.ProfileViewController;
 
 public class ProfileView {
@@ -40,9 +46,10 @@ public class ProfileView {
     private JLabel weightLabel;
     private JLabel weight;
     private JButton returnBtn;
-    private Object[] columnNames = {"Food", "Date entered", "Mood", "Date entered"};
-    private JTable entries;
+    private String[] columnNames = {"userid", "age", "weight"};
+    private JTable profileEntries;
     private DefaultTableModel model;
+    private TableColumnModel columnModel;
     private ProfileViewController pvc;
     
     /**
@@ -59,13 +66,10 @@ public class ProfileView {
         f.setSize(500, 500); // default size is 0,0
         
         f.setLocationRelativeTo(null);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  
-        model = new DefaultTableModel(columnNames, 0);
-        entries = new JTable(model);
-        p.add(entries);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        
         createComponents();
-        
+        getModel().addRow(columnNames);
+   
         f.add(p, BorderLayout.CENTER);
         f.setVisible(true);
     }
@@ -78,41 +82,18 @@ public class ProfileView {
         c.fill = GridBagConstraints.BOTH;
         
         
-        usernameLabel = new JLabel("Username: ");
+       usernameLabel = new JLabel(Database.username + "'s Profile");
         c.gridx = 0;
         c.gridy = 0;
         p.add(usernameLabel, c);
         
-        username = new JLabel(pvc.pm.getUsername());
-        c.gridx = 1;
-        c.gridy = 0;
-        c.anchor = GridBagConstraints.WEST;
-        c.fill = GridBagConstraints.WEST;
-        p.add(username, c);
         
-        ageLabel = new JLabel("Age: ");
-        c.gridx = 0;
-        c.gridy = 1;
-        p.add(ageLabel, c);
         
-        age = new JLabel(pvc.pm.getAge());
-        c.gridx = 1;
-        c.gridy = 1;
-        c.anchor = GridBagConstraints.WEST;
-        c.fill = GridBagConstraints.WEST;
-        p.add(age, c);
-        
-        weightLabel = new JLabel("Weight: ");
+        model = new DefaultTableModel(columnNames, 0);
+        profileEntries = new JTable(model);
         c.gridx = 0;
         c.gridy = 2;
-        p.add(weightLabel, c);
-        
-        weight = new JLabel(pvc.pm.getUsername());
-        c.gridx = 1;
-        c.gridy = 2;
-        c.anchor = GridBagConstraints.WEST;
-        c.fill = GridBagConstraints.WEST;
-        p.add(weight, c);
+        p.add(profileEntries, c); 
         
         
         
@@ -125,6 +106,10 @@ public class ProfileView {
     
     public JButton getReturnBtn() {
         return returnBtn;
+    }
+    
+    public DefaultTableModel getModel() {
+        return model;
     }
     
     public JFrame getF() {

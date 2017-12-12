@@ -25,7 +25,7 @@ public class ProfileModel implements Serializable {
     private String weight;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public ProfileModel(String username, String weight, String age) {
+    public ProfileModel(String username, String age, String weight ) {
         this.username = username;
         this.weight = weight;
         this.age = age;
