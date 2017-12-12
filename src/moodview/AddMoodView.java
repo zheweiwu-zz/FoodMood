@@ -38,7 +38,7 @@ public class AddMoodView {
     private JButton addBtn;
     private JButton returnButton;
     private JSlider moodRating;
-    private final int RATING_MIN = 0;
+    private final int RATING_MIN = 1;
     private final int RATING_INIT = 3;
     private final int RATING_MAX = 5;
     
